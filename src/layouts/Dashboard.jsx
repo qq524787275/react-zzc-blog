@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {withStyles} from 'material-ui/styles';
 import cx from "classnames";
 import {Switch, Route, Redirect} from "react-router-dom";
@@ -14,17 +14,6 @@ import appStyle from "assets/jss/material-dashboard-pro-react/layouts/dashboardS
 import image from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/logo.svg";
 
-
-function checkStatus() {
-    var token = localStorage.getItem("token");
-    console.debug(token);
-    // if(token) {
-    //     next()//如果有值直接下一步
-    // }else{
-    //     replace("/")//如果token信息为空就直接到登录页面
-    //     next();
-    // }
-}
 
 // 登录验证
 function requireAuth(Layout, props) {

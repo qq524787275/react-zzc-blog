@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import {createBrowserHistory} from "history";
-import {Router, Route, Switch, Redirect} from "react-router-dom";
+import {Router, Route, Switch} from "react-router-dom";
 import indexRoutes from "./routes/index.jsx";
 import "./assets/scss/material-dashboard-pro-react.css?v=1.1.0";
 

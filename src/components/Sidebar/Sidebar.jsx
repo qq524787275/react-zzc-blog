@@ -20,7 +20,7 @@ import HeaderLinks from "components/Header/HeaderLinks.jsx";
 
 import sidebarStyle from "assets/jss/material-dashboard-pro-react/components/sidebarStyle.jsx";
 
-import avatar from "assets/img/faces/avatar.jpg";
+// import avatar from "assets/img/faces/avatar.jpg";
 
 var ps;
 
@@ -88,137 +88,137 @@ class Sidebar extends React.Component {
       bgColor,
       rtlActive
     } = this.props;
-    const itemText =
-      classes.itemText +
-      " " +
-      cx({
-        [classes.itemTextMini]: this.props.miniActive && this.state.miniActive,
-        [classes.itemTextMiniRTL]:
-          rtlActive && this.props.miniActive && this.state.miniActive,
-        [classes.itemTextRTL]: rtlActive
-      });
-    const collapseItemText =
-      classes.collapseItemText +
-      " " +
-      cx({
-        [classes.collapseItemTextMini]:
-          this.props.miniActive && this.state.miniActive,
-        [classes.collapseItemTextMiniRTL]:
-          rtlActive && this.props.miniActive && this.state.miniActive,
-        [classes.collapseItemTextRTL]: rtlActive
-      });
-    const userWrapperClass =
-      classes.user +
-      " " +
-      cx({
-        [classes.whiteAfter]: bgColor === "white"
-      });
-    const caret =
-      classes.caret +
-      " " +
-      cx({
-        [classes.caretRTL]: rtlActive
-      });
-    const collapseItemMini =
-      classes.collapseItemMini +
-      " " +
-      cx({
-        [classes.collapseItemMiniRTL]: rtlActive
-      });
-    const photo =
-      classes.photo +
-      " " +
-      cx({
-        [classes.photoRTL]: rtlActive
-      });
-    var user = (
-      <div className={userWrapperClass}>
-        <div className={photo}>
-          <img src={avatar} className={classes.avatarImg} alt="..." />
-        </div>
-        <List className={classes.list}>
-          <ListItem className={classes.item + " " + classes.userItem}>
-            <NavLink
-              to={"#"}
-              className={classes.itemLink + " " + classes.userCollapseButton}
-              onClick={() => this.openCollapse("openAvatar")}
-            >
-              <ListItemText
-                primary={rtlActive ? "تانيا أندرو" : "Tania Andrew"}
-                secondary={
-                  <b
-                    className={
-                      caret + " " + classes.userCaret +
-                      " " +
-                      (this.state.openAvatar ? classes.caretActive : "")
-                    }
-                  />
-                }
-                disableTypography={true}
-                className={itemText + " " + classes.userItemText}
-              />
-            </NavLink>
-            <Collapse in={this.state.openAvatar} unmountOnExit>
-              <List className={classes.list + " " + classes.collapseList}>
-                <ListItem className={classes.collapseItem}>
-                  <NavLink
-                    to="#"
-                    className={
-                      classes.itemLink + " " + classes.userCollapseLinks
-                    }
-                  >
-                    <span className={collapseItemMini}>
-                      {rtlActive ? "مع" : "MP"}
-                    </span>
-                    <ListItemText
-                      primary={rtlActive ? "ملفي" : "My Profile"}
-                      disableTypography={true}
-                      className={collapseItemText}
-                    />
-                  </NavLink>
-                </ListItem>
-                <ListItem className={classes.collapseItem}>
-                  <NavLink
-                    to="#"
-                    className={
-                      classes.itemLink + " " + classes.userCollapseLinks
-                    }
-                  >
-                    <span className={collapseItemMini}>
-                      {rtlActive ? "هوع" : "EP"}
-                    </span>
-                    <ListItemText
-                      primary={
-                        rtlActive ? "تعديل الملف الشخصي" : "Edit Profile"
-                      }
-                      disableTypography={true}
-                      className={collapseItemText}
-                    />
-                  </NavLink>
-                </ListItem>
-                <ListItem className={classes.collapseItem}>
-                  <NavLink
-                    to="#"
-                    className={
-                      classes.itemLink + " " + classes.userCollapseLinks
-                    }
-                  >
-                    <span className={collapseItemMini}>
-                      {rtlActive ? "و" : "S"}
-                    </span>
-                    <ListItemText
-                      primary={rtlActive ? "إعدادات" : "Settings"}
-                      disableTypography={true}
-                      className={collapseItemText}
-                    />
-                  </NavLink>
-                </ListItem>
-              </List>
-            </Collapse>
-          </ListItem>
-        </List>
-      </div>
-    );
+    // const itemText =
+    //   classes.itemText +
+    //   " " +
+    //   cx({
+    //     [classes.itemTextMini]: this.props.miniActive && this.state.miniActive,
+    //     [classes.itemTextMiniRTL]:
+    //       rtlActive && this.props.miniActive && this.state.miniActive,
+    //     [classes.itemTextRTL]: rtlActive
+    //   });
+    // const collapseItemText =
+    //   classes.collapseItemText +
+    //   " " +
+    //   cx({
+    //     [classes.collapseItemTextMini]:
+    //       this.props.miniActive && this.state.miniActive,
+    //     [classes.collapseItemTextMiniRTL]:
+    //       rtlActive && this.props.miniActive && this.state.miniActive,
+    //     [classes.collapseItemTextRTL]: rtlActive
+    //   });
+    // const userWrapperClass =
+    //   classes.user +
+    //   " " +
+    //   cx({
+    //     [classes.whiteAfter]: bgColor === "white"
+    //   });
+    // const caret =
+    //   classes.caret +
+    //   " " +
+    //   cx({
+    //     [classes.caretRTL]: rtlActive
+    //   });
+    // const collapseItemMini =
+    //   classes.collapseItemMini +
+    //   " " +
+    //   cx({
+    //     [classes.collapseItemMiniRTL]: rtlActive
+    //   });
+    // const photo =
+    //   classes.photo +
+    //   " " +
+    //   cx({
+    //     [classes.photoRTL]: rtlActive
+    //   });
+    // var user = (
+    //   <div className={userWrapperClass}>
+    //     <div className={photo}>
+    //       <img src={avatar} className={classes.avatarImg} alt="..." />
+    //     </div>
+    //     <List className={classes.list}>
+    //       <ListItem className={classes.item + " " + classes.userItem}>
+    //         <NavLink
+    //           to={"#"}
+    //           className={classes.itemLink + " " + classes.userCollapseButton}
+    //           onClick={() => this.openCollapse("openAvatar")}
+    //         >
+    //           <ListItemText
+    //             primary={rtlActive ? "تانيا أندرو" : "Tania Andrew"}
+    //             secondary={
+    //               <b
+    //                 className={
+    //                   caret + " " + classes.userCaret +
+    //                   " " +
+    //                   (this.state.openAvatar ? classes.caretActive : "")
+    //                 }
+    //               />
+    //             }
+    //             disableTypography={true}
+    //             className={itemText + " " + classes.userItemText}
+    //           />
+    //         </NavLink>
+    //         <Collapse in={this.state.openAvatar} unmountOnExit>
+    //           <List className={classes.list + " " + classes.collapseList}>
+    //             <ListItem className={classes.collapseItem}>
+    //               <NavLink
+    //                 to="#"
+    //                 className={
+    //                   classes.itemLink + " " + classes.userCollapseLinks
+    //                 }
+    //               >
+    //                 <span className={collapseItemMini}>
+    //                   {rtlActive ? "مع" : "MP"}
+    //                 </span>
+    //                 <ListItemText
+    //                   primary={rtlActive ? "ملفي" : "My Profile"}
+    //                   disableTypography={true}
+    //                   className={collapseItemText}
+    //                 />
+    //               </NavLink>
+    //             </ListItem>
+    //             <ListItem className={classes.collapseItem}>
+    //               <NavLink
+    //                 to="#"
+    //                 className={
+    //                   classes.itemLink + " " + classes.userCollapseLinks
+    //                 }
+    //               >
+    //                 <span className={collapseItemMini}>
+    //                   {rtlActive ? "هوع" : "EP"}
+    //                 </span>
+    //                 <ListItemText
+    //                   primary={
+    //                     rtlActive ? "تعديل الملف الشخصي" : "Edit Profile"
+    //                   }
+    //                   disableTypography={true}
+    //                   className={collapseItemText}
+    //                 />
+    //               </NavLink>
+    //             </ListItem>
+    //             <ListItem className={classes.collapseItem}>
+    //               <NavLink
+    //                 to="#"
+    //                 className={
+    //                   classes.itemLink + " " + classes.userCollapseLinks
+    //                 }
+    //               >
+    //                 <span className={collapseItemMini}>
+    //                   {rtlActive ? "و" : "S"}
+    //                 </span>
+    //                 <ListItemText
+    //                   primary={rtlActive ? "إعدادات" : "Settings"}
+    //                   disableTypography={true}
+    //                   className={collapseItemText}
+    //                 />
+    //               </NavLink>
+    //             </ListItem>
+    //           </List>
+    //         </Collapse>
+    //       </ListItem>
+    //     </List>
+    //   </div>
+    // );
     var links = (
       <List className={classes.list}>
         {routes.map((prop, key) => {
@@ -391,10 +391,10 @@ class Sidebar extends React.Component {
       });
     var brand = (
       <div className={logoClasses}>
-        <a href="http://localhost:3000/index" className={logoMini}>
+        <a href="http://zhuzichu.com/index" className={logoMini}>
           <img src={logo} alt="logo" className={classes.img} />
         </a>
-        <a href="http://localhost:3000/index" className={logoNormal}>
+        <a href="http://zhuzichu.com/index" className={logoNormal}>
           {logoText}
         </a>
       </div>

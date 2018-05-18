@@ -42,6 +42,7 @@ class HeaderLinks extends React.Component {
             case 1:
                 localStorage.removeItem("token");
                 this.props.history.push("/admin/login");
+                break
             default:
                 break
         }

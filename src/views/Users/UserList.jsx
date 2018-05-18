@@ -10,16 +10,19 @@ import IconCard from "components/Cards/IconCard.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import Table from "components/Table/Table.jsx";
 
-import Person from "@material-ui/icons/Person";
 import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close"
 
 import extendedTablesStyle from "assets/jss/material-dashboard-pro-react/views/extendedTablesStyle.jsx";
 
+import {getUserList} from "http/okgo";
+
+import ReactPaginate from 'react-paginate';
 
 
 class UserList extends Component {
     state = {
+        result: {},
     };
 
     componentWillMount() {
@@ -27,7 +30,7 @@ class UserList extends Component {
     }
 
     componentDidMount() {
-
+        this.loadUserListData(1, 10);
     }
 
     componentWillReceiveProps() {
@@ -46,20 +49,37 @@ class UserList extends Component {
 
     }
 
+
+    handlePageClick = (a) => {
+        this.loadUserListData(a.selected+1,10);
+    }
+
+    loadUserListData = async (page, size) => {
+        let data = await getUserList(page, size);
+        this.setState({
+            ...this.state,
+            result: data.result
+        })
+        console.debug(this.state.result);
+    }
+
+    onItemClickListener=(a)=>{
+        console.debug(a.target);
+    }
+
     render() {
         const {classes} = this.props;
         //const { } = this.state;
-        const fillButtons = [
-            {color: "info", icon: Person},
-            {color: "success", icon: Edit},
-            {color: "danger", icon: Close}
-        ].map((prop, key) => {
-            return (
-                <Button color={prop.color} customClass={classes.actionButton} key={key}>
-                    <prop.icon className={classes.icon}/>
-                </Button>
-            );
-        });
+        // const fillButtons = [
+        //     {color: "success", icon: Edit},
+        //     {color: "danger", icon: Close}
+        // ].map((prop, key) => {
+        //     return (
+        //         <Button color={prop.color} customClass={classes.actionButton} key={key} onClick={this.onItemClickListener}>
+        //             <prop.icon className={classes.icon}/>
+        //         </Button>
+        //     );
+        // });
 
         return (
             <div className={classes.root}>
@@ -68,64 +88,64 @@ class UserList extends Component {
                         <IconCard
                             icon={Assignment}
                             title={"用户列表信息"}
+                            footer={
+                                <ReactPaginate previousLabel={"上一页"}
+                                               nextLabel={"下一页"}
+                                               breakLabel={<a href="">...</a>}
+                                               breakClassName={"break"}
+                                               pageCount={this.state.result.lastPage}
+                                               marginPagesDisplayed={1}
+                                               pageRangeDisplayed={3}
+                                               onPageChange={this.handlePageClick}
+                                               containerClassName={"react-paginate"}
+                                               subContainerClassName={"pages pagination"}
+                                               activeClassName={"active"} />
+                            }
                             content={
-                                <Table
-                                    tableHead={[
-                                        "#",
-                                        "Name",
-                                        "Job Position",
-                                        "Since",
-                                        "Salary",
-                                        "Actions"
-                                    ]}
-                                    tableData={[
-                                        [
-                                            "1",
-                                            "Andrew Mike",
-                                            "Develop",
-                                            "2013",
-                                            "€ 99,225",
-                                            fillButtons
-                                        ],
-                                        ["2", "John Doe", "Design", "2012", "€ 89,241", fillButtons],
-                                        [
-                                            "3",
-                                            "Alex Mike",
-                                            "Design",
-                                            "2010",
-                                            "€ 92,144",
-                                            fillButtons
-                                        ],
-                                        [
-                                            "4",
-                                            "Mike Monday",
-                                            "Marketing",
-                                            "2013",
-                                            "€ 49,990",
-                                            fillButtons
-                                        ],
-                                        [
-                                            "5",
-                                            "Paul Dickens",
-                                            "Communication",
-                                            "2015",
-                                            "€ 69,201",
-                                            fillButtons
-                                        ]
-                                    ]}
-                                    customCellClasses={[
-                                        classes.center,
-                                        classes.right,
-                                        classes.right
-                                    ]}
-                                    customClassesForCells={[0, 4, 5]}
-                                    customHeadCellClasses={[
-                                        classes.center,
-                                        classes.right,
-                                        classes.right
-                                    ]}
-                                    customHeadClassesForCells={[0, 4, 5]}
-                                />
+                                <div>
+                                    <Table
+                                        tableHead={[
+                                            "id",
+                                            "Username",
+                                            "Password",
+                                            "Actions"
+                                        ]}
+                                        tableData={
+                                            this.state.result.list !== undefined ? this.state.result.list.map(function (item, key) {
+                                                return [
+                                                    item.uid,
+                                                    item.username,
+                                                    item.password,
+                                                    [
+                                                        <Button color={"success"} customClass={classes.actionButton} key={"edit"} onClick={()=>{
+                                                            console.debug(item);
+                                                        }}>
+                                                            <Edit className={classes.icon}/>
+                                                        </Button>
+                                                        ,
+                                                        <Button color={"danger"} customClass={classes.actionButton} key={"close"} onClick={()=>{
+                                                            console.debug(item);
+                                                        }}>
+                                                            <Close className={classes.icon}/>
+                                                        </Button>
+                                                    ]
+                                                ]
+                                            }) : []
+                                        }
+                                        customCellClasses={[
+                                            classes.center,
+                                            classes.right,
+                                            classes.right
+                                        ]}
+                                        customClassesForCells={[0, 4, 5]}
+                                        customHeadCellClasses={[
+                                            classes.center,
+                                            classes.right,
+                                            classes.right
+                                        ]}
+                                        customHeadClassesForCells={[0, 4, 5]}
+                                    />
+                                </div>
                             }/>
                     </ItemGrid>
                 </GridContainer>

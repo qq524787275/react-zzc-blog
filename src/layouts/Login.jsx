@@ -6,7 +6,6 @@ import InputAdornment from "material-ui/Input/InputAdornment";
 // @material-ui/icons
 import Person from "@material-ui/icons/Person";
 import LockOutline from "@material-ui/icons/LockOutline";
-import AddAlert from "@material-ui/icons/AddAlert";
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import ItemGrid from "components/Grid/ItemGrid.jsx";
@@ -67,10 +66,10 @@ class Login extends Component {
     login = async (username, password) => {
         try {
             let result = await okLogin(username, password);
-            if (result == null || result.status == -1) {
+            if (result === null || result.status === -1) {
                 ActionMessage.getInstance().showMessage(result.msg,"danger");
                 console.debug("数据请求失败");
-            } else if (result != null && result.status == 1) {
+            } else if (result !== null && result.status === 1) {
                 localStorage.setItem("token", result.result);
                 console.debug(localStorage.getItem("token"));
                 ActionMessage.getInstance().hideMessgae();

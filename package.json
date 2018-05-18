@@ -26,12 +26,18 @@
     "react-draft-wysiwyg": "^1.12.13",
     "react-google-maps": "9.4.5",
     "react-jvectormap": "0.0.2",
+    "react-lazyload": "^2.3.0",
+    "react-mentions": "^2.0.1",
     "react-nouislider": "2.0.1",
+    "react-paginate": "^5.2.3",
     "react-router-dom": "4.2.2",
     "react-scripts": "1.1.4",
+    "react-slick": "0.23.1",
     "react-swipeable-views": "0.12.13",
     "react-table": "6.8.0",
-    "react-tagsinput": "3.19.0"
+    "react-tagsinput": "3.19.0",
+    "react-transition-group": "^2.3.1",
+    "scroll-to": "^0.0.2"
   },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",

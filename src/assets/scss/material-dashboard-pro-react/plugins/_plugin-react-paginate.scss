@@ -1,0 +1,38 @@
+.react-paginate ul {
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.react-paginate li {
+  display: inline-block;
+  cursor: Pointer;
+  min-width: 30px;
+  margin: 2px;
+  height: 30px;
+  text-align: center;
+}
+
+.react-paginate a {
+  display: block;
+  line-height: 30px;
+  color: #666666;
+}
+
+.react-paginate a:hover {
+  color: #666666;
+}
+.react-paginate a:focus {
+  color: #666666;
+}
+
+.react-paginate .break a {
+
+}
+
+.react-paginate .active a {
+  background-color: #E91E63;
+  color: white;
+  border-radius: 15px;
+  box-shadow: 5px 5px 10px #888888;
+}

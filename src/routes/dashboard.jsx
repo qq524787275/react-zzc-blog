@@ -29,13 +29,12 @@ var dashRoutes = [
             {
                 path: "/admin/articles/article-list",
                 name: "文章列表",
-                mini: "1",
+                // mini: "LB",
                 component: ArticleList
             },
             {
                 path: "/admin/articles/article-publish",
                 name: "文章发布",
-                mini: "2",
                 component: ArticlePulish
             }
         ]
@@ -50,13 +49,11 @@ var dashRoutes = [
             {
                 path: "/admin/projects/project-list",
                 name: "项目列表",
-                mini: "1",
                 component: ProjectList
             },
             {
                 path: "/admin/projects/project-add",
                 name: "添加项目",
-                mini: "2",
                 component: ProjectAdd
             }
         ]
@@ -71,13 +68,11 @@ var dashRoutes = [
             {
                 path: "/admin/users/user-list",
                 name: "用户列表",
-                mini: "1",
                 component: UserList
             },
             {
                 path: "/admin/users/user-add",
                 name: "添加用户",
-                mini: "2",
                 component: UserAdd
             },
         ]

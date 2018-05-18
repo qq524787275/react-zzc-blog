@@ -41,7 +41,7 @@ const profileCardStyle = {
     color: grayColor,
     ...defaultFont,
     fontSize: "14px",
-    textTransform: "uppercase",
+    textTransform: "capitalize",
     marginTop: "10px"
   },
   cardTitle: {

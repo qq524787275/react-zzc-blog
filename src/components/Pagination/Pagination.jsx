@@ -9,7 +9,7 @@ import Button from 'material-ui/Button';
 import paginationStyle from "assets/jss/material-dashboard-pro-react/components/paginationStyle.jsx";
 
 function Pagination({ ...props }) {
-  const { classes, pages, color } = props;
+  const { classes, pages, color ,onPageClick} = props;
   return (
     <ul className={classes.pagination}>
       {pages.map((prop, key) => {
@@ -26,7 +26,7 @@ function Pagination({ ...props }) {
               </Button>
             ) : (
               <Button
-                onClick={() => console.log("you've clicked " + prop.text)}
+                onClick={() =>onPageClick(prop.text)}
                 className={paginationLink}
               >
                 {prop.text}
@@ -51,7 +51,7 @@ Pagination.propTypes = {
       disabled: PropTypes.bool,
       text: PropTypes.oneOfType([
         PropTypes.number,
-        PropTypes.oneOf(["PREV", "NEXT", "..."])
+        PropTypes.oneOf(["PREV", "NEXT", "...","上一页","下一页"])
       ]).isRequired,
       onClick: PropTypes.func
     })

@@ -2,6 +2,7 @@ import React from "react";
 import cx from "classnames";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
+import Typography from 'material-ui/Typography';
 
 // material-ui components
 import withStyles from "material-ui/styles/withStyles";
@@ -45,18 +46,7 @@ class PagesHeader extends React.Component {
     });
     var list = (
       <List className={classes.list}>
-        <ListItem className={classes.listItem}>
-          <NavLink to={"/dashboard"} className={classes.navLink}>
-            <ListItemIcon className={classes.listItemIcon}>
-              <Dashboard />
-            </ListItemIcon>
-            <ListItemText
-              primary={"Dashboard"}
-              disableTypography={true}
-              className={classes.listItemText}
-            />
-          </NavLink>
-        </ListItem>
+
         {pagesRoutes.map((prop, key) => {
           if (prop.redirect) {
             return null;
@@ -81,14 +71,28 @@ class PagesHeader extends React.Component {
             </ListItem>
           );
         })}
+          <ListItem className={classes.listItem}>
+              <NavLink to={"/admin"} className={classes.navLink}>
+                  <ListItemIcon className={classes.listItemIcon}>
+                      <Dashboard />
+                  </ListItemIcon>
+                  <ListItemText
+                      primary={"后台管理"}
+                      disableTypography={true}
+                      className={classes.listItemText}
+                  />
+              </NavLink>
+          </ListItem>
       </List>
     );
     return (
       <AppBar position="static" className={classes.appBar + appBarClasses}>
         <Toolbar className={classes.container}>
           <div className={classes.flex}>
-            <Button href="#" className={classes.title}>
-              Material Dashboard Pro React
+            <Button href="/index" className={classes.title}>
+                <Typography style={{color:"#ffffff",fontSize:"1.2em",fontStyle:"oblique",fontWeight:"bold"}}>
+                    朱子楚的博客
+                </Typography>
             </Button>
           </div>
           <Hidden smDown implementation="css">
