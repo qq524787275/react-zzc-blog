@@ -3218,10 +3218,12 @@ button.rbc-input::-moz-focus-inner {
   counter-reset: ol4; }
 
 /*# sourceMappingURL=react-draft-wysiwyg.css.map*/
-.react-paginate ul {
+.react-paginate {
   display: inline-block;
   padding-left: 15px;
-  padding-right: 15px; }
+  padding-right: 15px;
+  list-style: none;
+  margin: 0 auto; }
 
 .react-paginate li {
   display: inline-block;

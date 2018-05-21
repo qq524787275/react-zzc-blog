@@ -29,3 +29,13 @@ export const projectList=(page,size)=>http(baseUrl+"/api/project/list",{
     page:page,
     size:size
 },"GET");
+
+export const guestbookList=(page,size)=>http(baseUrl+"/api/guestbook/list",{
+    page:page,
+    size:size
+},"GET");
+
+export const addGuestbook=(nickname,content)=>http(baseUrl+"/api/guestbook/add",{
+    nickname:nickname,
+    content:content
+},"POST")
