@@ -1,10 +1,9 @@
-import React, {Component, PureComponent} from 'react';
+import React, {Component} from 'react';
 import {withStyles} from 'material-ui/styles';
 
 import guestBookStyle from "assets/jss/material-dashboard-pro-react/pages/guestBookStyle.jsx";
 import IconCard from "components/Cards/IconCard";
 
-import GridContainer from "../../components/Grid/GridContainer";
 import ItemGrid from "../../components/Grid/ItemGrid";
 
 import Favorite from "@material-ui/icons/Favorite";
@@ -12,14 +11,38 @@ import Favorite from "@material-ui/icons/Favorite";
 import {Grow} from 'material-ui/transitions';
 
 import IconButton from "components/CustomButtons/IconButton.jsx";
-import CustomInput from "components/CustomInput/CustomInput.jsx";
 import EditIcon from "@material-ui/icons/Edit";
 
-import SweetAlert from "react-bootstrap-sweetalert";
+import Masonry from 'react-masonry-component';
+
+import SweetAlert from 'react-bootstrap-sweetalert';
+
+import CustomInput from "components/CustomInput/CustomInput.jsx";
+
+import {guestbookList, addGuestbook} from "http/okgo";
+import ActionMessage from "../../action/ActionMessage";
+
+import ReactPaginate from 'react-paginate';
+
+import Paper from 'material-ui/Paper';
 
 class Guestbook extends Component {
+
+
+    constructor(props, context) {
+        super(props, context);
+        this.page = 1;
+        this.size = 12;
+        this.param = {
+            nickname: null,
+            content: null,
+        };
+    }
+
     state = {
-        aa:""
+        alert: null,
+        result: null,
+        paginate:null
     };
 
     componentWillMount() {
@@ -27,7 +50,7 @@ class Guestbook extends Component {
     }
 
     componentDidMount() {
-
+        this.loadGuestbookList(this.page, this.size);
     }
 
     componentWillReceiveProps() {
@@ -46,11 +69,147 @@ class Guestbook extends Component {
 
     }
 
-    clickEdit = () => {
-        console.debug("点击了");
+    loadGuestbookList = async (page, size) => {
+        this.setState({
+            ...this.state,
+            result: null,
+            paginate:null
+        })
 
+        let response = await guestbookList(page, size);
+        this.setState({
+            ...this.state,
+            result: response.result,
+            paginate:(
+                <Grow
+                    style={{transitionDelay: (response.result.list.length) * 100}} in={true}
+                    timeout={{enter: 500, exit: 0}}>
+                    <div style={{display: "flex", justifyContent: "center"}}>
+
+                        <Paper style={{display: "inline", padding: 15}}>
+                            <ReactPaginate previousLabel={"上一页"}
+                                           nextLabel={"下一页"}
+                                           breakLabel={<a href="">...</a>}
+                                           breakClassName={"break"}
+                                           forcePage={response.result.prePage}
+                                           pageCount={response.result.lastPage}
+                                           marginPagesDisplayed={1}
+                                           pageRangeDisplayed={3}
+                                           onPageChange={this.handlePageClick}
+                                           containerClassName={"react-paginate"}
+                                           activeClassName={"active"}/>
+                        </Paper>
+                    </div>
+                </Grow>
+            ),
+            alert: null,
+        })
+        console.debug(response);
     }
 
+    loadAddGuestbook = async (nickname, content) => {
+        let response = await addGuestbook(nickname, content);
+        if (response.status === 1) {
+            this.successAdd();
+            this.param = {
+                nickname: null,
+                content: null,
+            };
+        } else {
+            ActionMessage.getInstance().showMessage(response.msg, "danger")
+        }
+        console.debug(response);
+    }
+
+    clickEdit = () => {
+        console.debug("点击了");
+        this.inputAlert();
+    }
+
+    inputConfirmAlert = () => {
+        this.loadAddGuestbook(this.param.nickname, this.param.content);
+    }
+
+    handleChange = e => {
+        this.param = {
+            ...this.param,
+            [e.target.id]: e.target.value
+        }
+    }
+
+    inputAlert = () => {
+        this.setState({
+            alert: (
+                <SweetAlert
+                    showCancel
+                    style={{display: "block", marginTop: "-100px"}}
+                    title="留言"
+                    confirmBtnText={"确认"}
+                    cancelBtnText={"取消"}
+                    onConfirm={e => this.inputConfirmAlert(e)}
+                    onCancel={() => this.setState({alert: null})}
+                    confirmBtnCssClass={
+                        this.props.classes.button + " " + this.props.classes.info
+                    }
+                    cancelBtnCssClass={
+                        this.props.classes.button + " " + this.props.classes.danger
+                    }
+                >
+                    <form>
+                        <CustomInput
+                            labelText="昵称"
+                            id="nickname"
+                            formControlProps={{
+                                fullWidth: true
+                            }}
+                            inputProps={{
+                                onChange: this.handleChange
+                            }}
+                        />
+                        <CustomInput
+                            labelText="内容"
+                            id="content"
+                            formControlProps={{
+                                fullWidth: true
+                            }}
+                            inputProps={{
+                                onChange: this.handleChange
+                            }}
+                        />
+                    </form>
+                </SweetAlert>
+            )
+        });
+    }
+
+    successAdd() {
+        this.setState({
+            alert: (
+                <SweetAlert
+                    success
+                    style={{display: "block", marginTop: "-100px"}}
+                    title="留言成功!"
+                    onConfirm={() => {
+                        this.page = 1;
+                        this.loadGuestbookList(this.page, this.size);
+                    }}
+                    onCancel={() => {
+                        this.page = 1;
+                        this.loadGuestbookList(this.page, this.size);
+                    }}
+                    confirmBtnCssClass={
+                        this.props.classes.button + " " + this.props.classes.success
+                    }
+                >
+                    亲！你的留言已经展示到页面上了.
+                </SweetAlert>
+            )
+        });
+    }
+
+    handlePageClick = (a) => {
+        this.loadGuestbookList(a.selected + 1, this.size);
+    }
 
     render() {
         const {classes} = this.props;
@@ -63,34 +222,6 @@ class Guestbook extends Component {
             "purple",
             "rose"
         ];
-        const childElements = [
-            "123",
-            "456",
-            "789",
-            "asd",
-            "hjg",
-            "cxz",
-        ].map((element, key) => {
-            let h = Math.floor(Math.random() * 150 + 100);
-            let offset = Math.floor(Math.random() * 80 + 30);
-            return (
-                <Grow key={element} style={{transitionDelay: key * 100}} in={true}
-                      timeout={{enter: 500, exit: 500}}>
-                    <ItemGrid xs={12} sm={12} md={4} style={{marginTop: offset}}>
-                        <IconCard
-                            iconColor={color[Math.floor(Math.random() * 6 + 0)]}
-                            title={"哈哈"}
-                            icon={Favorite}
-                            content={
-                                <div
-                                    style={{height: h}}></div>
-                            }>
-
-                        </IconCard>
-                    </ItemGrid>
-                </Grow>
-            );
-        });
 
         return (
             <div className={classes.content}>
@@ -100,10 +231,41 @@ class Guestbook extends Component {
                     </IconButton>
                 </div>
                 <div className={classes.container}>
-                    <GridContainer>
-                        {childElements}
-                    </GridContainer>
+                    <Masonry>
+                        {
+                            this.state.result !== null ? this.state.result.list.map((item, key) => {
+                                let h = Math.floor(Math.random() * 120 + 60);
+                                return (
+                                    <div key={key}>
+                                        <Grow style={{transitionDelay: key * 100}} in={true}
+                                              timeout={{enter: 500, exit: 0}}>
+                                            <ItemGrid>
+                                                <IconCard
+                                                    iconColor={color[Math.floor(Math.random() * 6 + 0)]}
+                                                    title={item.nickname}
+                                                    icon={Favorite}
+                                                    content={
+                                                        <div
+                                                            style={{height: h, width: 210}}>
+                                                            {item.content}
+                                                        </div>
+                                                    }>
+
+                                                </IconCard>
+                                            </ItemGrid>
+                                        </Grow>
+                                    </div>
+                                );
+                            }) : null
+                        }
+                    </Masonry>
+                    {
+                        this.state.paginate
+                    }
                 </div>
+                {
+                    this.state.alert
+                }
             </div>
         );
     }
@@ -112,5 +274,4 @@ class Guestbook extends Component {
 export default withStyles(guestBookStyle)
 (
     Guestbook
-)
-;
+);
