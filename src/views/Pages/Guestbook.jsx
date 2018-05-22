@@ -26,6 +26,7 @@ import ReactPaginate from 'react-paginate';
 
 import Paper from 'material-ui/Paper';
 
+import {timestampToTime} from '../../uitls/ProjectDateUtils';
 class Guestbook extends Component {
 
 
@@ -92,7 +93,7 @@ class Guestbook extends Component {
                                            breakLabel={<a href="">...</a>}
                                            breakClassName={"break"}
                                            forcePage={response.result.prePage}
-                                           pageCount={response.result.lastPage}
+                                           pageCount={response.result.pages}
                                            marginPagesDisplayed={1}
                                            pageRangeDisplayed={3}
                                            onPageChange={this.handlePageClick}
@@ -247,7 +248,8 @@ class Guestbook extends Component {
                                                     content={
                                                         <div
                                                             style={{height: h, width: 210}}>
-                                                            {item.content}
+                                                            <p>{item.content}</p>
+                                                            <div style={{position:"absolute",bottom:"0px",right:"0px",margin:10,color:"#000",fontStyle:"italic"}}>{timestampToTime(item.date)}</div>
                                                         </div>
                                                     }>
 
@@ -271,7 +273,4 @@ class Guestbook extends Component {
     }
 }
 
-export default withStyles(guestBookStyle)
-(
-    Guestbook
-);
+export default withStyles(guestBookStyle)(Guestbook);

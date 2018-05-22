@@ -7,8 +7,9 @@
  * 
  */
 
-let baseUrl = 'http://localhost:8011';
-
+let baseUrl = 'http://zhuzichu.com:8080';
+let uploadUrl= 'http://zhuzichu.com:8080/api/file/upload';
 export {
 	baseUrl,
+    uploadUrl,
 }

@@ -15,7 +15,6 @@ import GridContainer from "components/Grid/GridContainer";
 
 import IconCard from "components/Cards/IconCard";
 
-import {CSSTransitionGroup} from "react-transition-group";
 class Index extends Component {
     state = {};
 

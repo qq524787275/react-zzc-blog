@@ -2,6 +2,7 @@ import IconDashboard from "@material-ui/icons/Dashboard";
 import IconApps from "@material-ui/icons/Apps";
 import IconReceipt from "@material-ui/icons/ContentPaste";
 import IconPerson from "@material-ui/icons/Person";
+import IconFavorite from "@material-ui/icons/Favorite";
 
 import Home from "views/Home/Home";
 import ArticleList from "views/Articles/ArticleList";
@@ -10,7 +11,7 @@ import ProjectList from "views/Projects/ProjectList";
 import ProjectAdd from "views/Projects/ProjectAdd";
 import UserList from "views/Users/UserList";
 import UserAdd from "views/Users/UserAdd";
-
+import About from "views/About/About";
 
 var dashRoutes = [
     {
@@ -76,6 +77,12 @@ var dashRoutes = [
                 component: UserAdd
             },
         ]
+    },
+    {
+        path: "/admin/about",
+        name: "关于",
+        icon: IconFavorite,
+        component: About
     },
     {redirect: true, path: "/", pathTo: "/admin/home", name: "首页"}
 ]

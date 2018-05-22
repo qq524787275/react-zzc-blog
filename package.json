@@ -7,8 +7,6 @@
     "axios": "^0.18.0",
     "chartist": "0.10.1",
     "clone": "^2.1.1",
-    "draft-js": "^0.10.5",
-    "draftjs-to-html": "^0.8.3",
     "history": "4.7.2",
     "material-ui": "1.0.0-beta.41",
     "mobx": "^4.2.1",
@@ -23,7 +21,6 @@
     "react-chartist": "0.13.1",
     "react-datetime": "2.14.0",
     "react-dom": "^16.3.2",
-    "react-draft-wysiwyg": "^1.12.13",
     "react-google-maps": "9.4.5",
     "react-infinite-scroller": "^1.1.4",
     "react-jvectormap": "0.0.2",
@@ -39,7 +36,8 @@
     "react-table": "6.8.0",
     "react-tagsinput": "3.19.0",
     "react-transition-group": "^2.3.1",
-    "scroll-to": "^0.0.2"
+    "scroll-to": "^0.0.2",
+    "wangeditor": "^3.1.1"
   },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",

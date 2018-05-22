@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import {withStyles} from 'material-ui/styles';
+import Editor from "components/Editor/Editor";
 const styles = {
     root: {},
 };
 
 class ProjectAdd extends Component {
-    state = {};
+    state = {
+
+    };
 
     componentWillMount() {
 
@@ -36,7 +39,7 @@ class ProjectAdd extends Component {
         //const { } = this.state;
         return (
             <div className={classes.root}>
-            <div>添加项目</div>
+                <Editor></Editor>
             </div>
         );
     }

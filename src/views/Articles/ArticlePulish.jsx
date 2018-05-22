@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
 import {withStyles} from 'material-ui/styles';
-import {EditorState, convertToRaw} from 'draft-js';
-import {Editor} from 'react-draft-wysiwyg';
-import draftToHtml from 'draftjs-to-html';
+
 
 import HeaderCard from "components/Cards/HeaderCard.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import ItemGrid from "components/Grid/ItemGrid.jsx";
 import CustomInput from 'components/CustomInput/CustomInput';
 import Button from 'components/CustomButtons/Button';
-
+import Editor from 'components/Editor/Editor';
 import ActionMesage from "action/ActionMessage"
 
 import {CircularProgress} from 'material-ui/Progress';
@@ -32,8 +30,7 @@ class ArticlePulish extends Component {
 
     state = {
         title:"",
-        editorState: EditorState.createEmpty(),
-        isSubmitting: false,
+        content:""
     };
 
     componentWillMount() {
@@ -84,25 +81,10 @@ class ArticlePulish extends Component {
 
     }
 
-    onEditorStateChange = (editorState) => {
-        this.setState({
-            editorState: editorState
-        }, () => {
-            // console.debug(editorState);
-            // console.log(draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())));
-        });
-    }
+
 
     submit = () => {
-        let content=draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()));
-        if(content.length===8){
-            ActionMesage.getInstance().showMessage("内容不能为空","danger");
-            return;
-        }
-        this.setState({
-            isSubmitting: true,
-        })
-        this.loadPushArticle(this.state.title,content);
+        console.debug(this.state.content);
     }
 
     handleChange=event=>{
@@ -110,6 +92,10 @@ class ArticlePulish extends Component {
             ...this.state,
             [event.target.id]: event.target.value
         })
+    }
+
+    onChange=(a)=>{
+        console.debug(a);
     }
 
     render() {
@@ -141,13 +127,7 @@ class ArticlePulish extends Component {
                                         </CustomInput>
                                     </ItemGrid>
                                     <ItemGrid xs={12}>
-                                        <Editor
-                                            localization={{locale: 'zh'}}
-                                            initialEditorState={this.state.editorState}
-                                            wrapperClassName={classes.wrapper}
-                                            editorClassName={classes.editor}
-                                            onEditorStateChange={this.onEditorStateChange}
-                                        />
+                                        <Editor onChange={this.onChange} init={<p>什么鬼哦</p>}/>
                                     </ItemGrid>
                                     <GridContainer justify={"center"}>
                                         <ItemGrid>

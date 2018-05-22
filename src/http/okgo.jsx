@@ -39,3 +39,9 @@ export const addGuestbook=(nickname,content)=>http(baseUrl+"/api/guestbook/add",
     nickname:nickname,
     content:content
 },"POST")
+
+export const getAbout=()=>http(baseUrl+"/api/about/getAbout","","GET")
+
+export const updateAbout=(content)=>http(baseUrl+"/api/about/update",{
+    content:content,
+},"POST")

@@ -3,12 +3,14 @@ import Article from "views/Pages/Article";
 import Person from "views/Pages/Person";
 import Project from "views/Pages/Project";
 import Guestbook from "views/Pages/Guestbook";
+import About from "views/Pages/About";
 // @material-ui/icons
 import Home from "@material-ui/icons/Home";
 import IconApps from "@material-ui/icons/Apps";
 import IconReceipt from "@material-ui/icons/ContentPaste";
 import IconPerson from "@material-ui/icons/Person";
 import IconLanguage from "@material-ui/icons/Language";
+import Favorite from "@material-ui/icons/Favorite";
 
 const pagesRoutes = [
     {
@@ -50,6 +52,14 @@ const pagesRoutes = [
         mini: "RP",
         icon: IconLanguage,
         component: Guestbook
+    },
+    {
+        path: "/about",
+        name: "About Page",
+        short: "关于",
+        mini: "RP",
+        icon: Favorite,
+        component: About
     },
     {
         redirect: true,

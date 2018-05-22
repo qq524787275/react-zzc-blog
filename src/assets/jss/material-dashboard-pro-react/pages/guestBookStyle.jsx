@@ -4,7 +4,6 @@
 
 import {
    container,
-    roseColor
 } from "../../material-dashboard-pro-react.jsx";
 
 import buttonStyle from "assets/jss/material-dashboard-pro-react/components/buttonStyle.jsx";

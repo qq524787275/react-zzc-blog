@@ -25,7 +25,7 @@ class Login extends Component {
     state = {
         alert: null,
         cardAnimaton: "cardHidden",
-        username: "admin",
+        username: "zhuzichu",
         password: "admin",
         isLoading: false,
         showMessage: false,
