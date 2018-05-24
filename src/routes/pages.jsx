@@ -24,7 +24,7 @@ const pagesRoutes = [
     {
         path: "/article",
         name: "Article Page",
-        short: "推文",
+        short: "文章",
         mini: "RP",
         icon: IconReceipt,
         component: Article

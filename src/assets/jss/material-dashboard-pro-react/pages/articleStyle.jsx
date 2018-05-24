@@ -14,6 +14,12 @@ const appStyle = theme => ({
         zIndex: "4"
     },
     container,
+    love: {
+        "&:hover": {
+            backgroundColor:"red"
+        }
+    }
+
 });
 
 export default appStyle;

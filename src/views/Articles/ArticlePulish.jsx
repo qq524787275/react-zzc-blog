@@ -21,16 +21,25 @@ const styles = {
         height: 250,
         border: "1px solid #efefef",
     },
-    wrapper: {}
+    header:{
+        "&:hover":{
+            fontWeight:"bold",
+        }
+    }
 };
 
 class ArticlePulish extends Component {
 
     a = ActionMesage.getInstance();
 
+    constructor(props, context) {
+        super(props, context);
+        this.content = "";
+    }
+
     state = {
-        title:"",
-        content:""
+        title: "",
+        description: "",
     };
 
     componentWillMount() {
@@ -57,23 +66,23 @@ class ArticlePulish extends Component {
 
     }
 
-    loadPushArticle=async(title,content)=>{
+    loadPushArticle = async (title, decription, content) => {
         try {
-            let result = await pushArticle(title, content);
-            if(result===null || result.status===-1){
-                ActionMessage.getInstance().showMessage(result.msg,"danger");
+            let result = await pushArticle(title, decription, content);
+            if (result === null || result.status === -1) {
+                ActionMessage.getInstance().showMessage(result.msg, "danger");
                 console.debug("数据请求失败");
-            }else{
-                ActionMesage.getInstance().showMessage(result.msg,"success");
+            } else {
+                ActionMesage.getInstance().showMessage(result.msg, "success");
                 this.setState({
                     ...this.state,
                     title: "",
                 });
             }
-        }catch (e){
+        } catch (e) {
             console.debug(e);
             ActionMesage.getInstance().showMessage("网络异常");
-        }finally {
+        } finally {
             this.setState({
                 isSubmitting: false,
             })
@@ -82,20 +91,26 @@ class ArticlePulish extends Component {
     }
 
 
-
     submit = () => {
-        console.debug(this.state.content);
+        console.debug(this.state.title);
+        console.debug(this.state.description);
+        console.debug(this.content);
+        this.loadPushArticle(this.state.title, this.state.description, this.content);
     }
 
-    handleChange=event=>{
+    handleChange = event => {
         this.setState({
             ...this.state,
             [event.target.id]: event.target.value
         })
     }
 
-    onChange=(a)=>{
-        console.debug(a);
+    onChange = (content) => {
+        this.content = content;
+    }
+
+    go=()=>{
+
     }
 
     render() {
@@ -106,7 +121,7 @@ class ArticlePulish extends Component {
                 <GridContainer justify={"center"}>
                     <ItemGrid xs={10}>
                         <HeaderCard
-                            cardTitle={"填写文章信息"}
+                            cardTitle={<div className={classes.header} onClick={this.go}>填写文章信息</div>}
                             headerColor={"rose"}
                             content={
                                 <GridContainer>
@@ -126,8 +141,24 @@ class ArticlePulish extends Component {
                                         >
                                         </CustomInput>
                                     </ItemGrid>
+                                    <ItemGrid xs={12} style={{marginBottom: 20}}>
+                                        <CustomInput
+                                            id={"description"}
+                                            labelText={"描述"}
+                                            inputProps={{
+                                                value: this.state.description,
+                                                onChange: this.handleChange,
+                                            }}
+                                            formControlProps={
+                                                {
+                                                    fullWidth: true,
+                                                }
+                                            }
+                                        >
+                                        </CustomInput>
+                                    </ItemGrid>
                                     <ItemGrid xs={12}>
-                                        <Editor onChange={this.onChange} init={<p>什么鬼哦</p>}/>
+                                        <Editor onChange={this.onChange}/>
                                     </ItemGrid>
                                     <GridContainer justify={"center"}>
                                         <ItemGrid>

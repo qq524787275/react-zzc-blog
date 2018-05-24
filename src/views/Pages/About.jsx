@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {withStyles} from 'material-ui/styles';
 import aboutStyle from "assets/jss/material-dashboard-pro-react/pages/aboutStyle.jsx";
-import RegularCard from "components/Cards/RegularCard.jsx";
+import HeaderCard from "components/Cards/HeaderCard.jsx";
 import {Zoom} from 'material-ui/transitions';
 import {getAbout} from "../../http/okgo";
+
 class About extends Component {
     state = {
-        card:null
+        card: null
     };
 
     componentWillMount() {
@@ -35,13 +36,13 @@ class About extends Component {
 
         this.setState({
             ...this.state,
-            card:(
+            card: (
                 <Zoom in={true} timeout={{enter: 500, exit: 500}}>
                     <div>
-                        <RegularCard cardTitle={"技术栈"} content={
+                        <HeaderCard cardTitle={"技术栈"} headerColor={"rose"} content={
                             <div dangerouslySetInnerHTML={{__html: response.result.content}}>
                             </div>
-                        }></RegularCard>
+                        }></HeaderCard>
                     </div>
                 </Zoom>
             )

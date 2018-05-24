@@ -4,12 +4,13 @@ import {
     baseUrl
 } from 'http/env'
 
-
+//登录
 export const login = (username, password) => http(baseUrl + '/api/admin/login', {
     username: username,
     password: password,
 }, 'POST');
 
+//添加用户
 export const addUser = (username, password) => http(baseUrl + "/api/admin/add", {
     username: username,
     password: password
@@ -20,9 +21,19 @@ export const getUserList=(page,size)=> http(baseUrl+"/api/admin/list",{
     size:size
 },"POST");
 
-export const pushArticle=(title,content)=>http(baseUrl+"/api/article/add",{
+export const getArticleDetial=(id)=>http(baseUrl+"/api/article/detail",{
+    id:id,
+},"POST");
+
+export const pushArticle=(title,description,content)=>http(baseUrl+"/api/article/add",{
     title:title,
+    description:description,
     content:content
+},"POST");
+
+export const getArticleList=(page,size)=>http(baseUrl+"/api/article/list",{
+    page:page,
+    size:size
 },"POST");
 
 export const projectList=(page,size)=>http(baseUrl+"/api/project/list",{
@@ -45,3 +56,4 @@ export const getAbout=()=>http(baseUrl+"/api/about/getAbout","","GET")
 export const updateAbout=(content)=>http(baseUrl+"/api/about/update",{
     content:content,
 },"POST")
+

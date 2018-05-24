@@ -23,6 +23,7 @@ import ReactPaginate from 'react-paginate';
 class UserList extends Component {
     state = {
         result: {},
+        paginate:null,
     };
 
     componentWillMount() {
@@ -51,19 +52,32 @@ class UserList extends Component {
 
 
     handlePageClick = (a) => {
-        this.loadUserListData(a.selected+1,10);
+        this.loadUserListData(a.selected + 1, 10);
     }
 
     loadUserListData = async (page, size) => {
         let data = await getUserList(page, size);
         this.setState({
             ...this.state,
-            result: data.result
+            result: data.result,
+            paginate:(
+                <ReactPaginate previousLabel={"上一页"}
+                               nextLabel={"下一页"}
+                               breakLabel={<a href="">...</a>}
+                               breakClassName={"break"}
+                               pageCount={this.state.result.lastPage}
+                               marginPagesDisplayed={1}
+                               pageRangeDisplayed={3}
+                               onPageChange={this.handlePageClick}
+                               containerClassName={"react-paginate"}
+                               subContainerClassName={"pages pagination"}
+                               activeClassName={"active"}/>
+            )
         })
         console.debug(this.state.result);
     }
 
-    onItemClickListener=(a)=>{
+    onItemClickListener = (a) => {
         console.debug(a.target);
     }
 
@@ -89,17 +103,8 @@ class UserList extends Component {
                             icon={Assignment}
                             title={"用户列表信息"}
                             footer={
-                                <ReactPaginate previousLabel={"上一页"}
-                                               nextLabel={"下一页"}
-                                               breakLabel={<a href="">...</a>}
-                                               breakClassName={"break"}
-                                               pageCount={this.state.result.lastPage}
-                                               marginPagesDisplayed={1}
-                                               pageRangeDisplayed={3}
-                                               onPageChange={this.handlePageClick}
-                                               containerClassName={"react-paginate"}
-                                               subContainerClassName={"pages pagination"}
-                                               activeClassName={"active"} />
+                                this.state.paginate
+
                             }
                             content={
                                 <div>
@@ -117,13 +122,15 @@ class UserList extends Component {
                                                     item.username,
                                                     item.password,
                                                     [
-                                                        <Button color={"success"} customClass={classes.actionButton} key={"edit"} onClick={()=>{
+                                                        <Button color={"success"} customClass={classes.actionButton}
+                                                                key={"edit"} onClick={() => {
                                                             console.debug(item);
                                                         }}>
                                                             <Edit className={classes.icon}/>
                                                         </Button>
                                                         ,
-                                                        <Button color={"danger"} customClass={classes.actionButton} key={"close"} onClick={()=>{
+                                                        <Button color={"danger"} customClass={classes.actionButton}
+                                                                key={"close"} onClick={() => {
                                                             console.debug(item);
                                                         }}>
                                                             <Close className={classes.icon}/>

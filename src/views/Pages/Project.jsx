@@ -63,7 +63,7 @@ class Project extends Component {
                                 this.state.data.list.map(function (item, key) {
                                     console.debug(item);
                                     return (
-                                        <Fade style={{transitionDelay:key*100}} in={true} timeout={{enter:1000,exit:500}}>
+                                        <Fade key={key} style={{transitionDelay:key*100}} in={true} timeout={{enter:1000,exit:500}}>
                                             <ItemGrid xs={12} sm={12} md={3}>
                                                 <ImagePriceCard
                                                     image={item.image}

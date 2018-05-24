@@ -3481,7 +3481,7 @@ button.slick-arrow.slick-next {
 .fade-exit {
   opacity: 1; }
 
-.fade-exit.fade-leave-active {
+.fade-exit.fade-exit-active {
   opacity: 0.01;
   transition: opacity 300ms ease-in; }
 

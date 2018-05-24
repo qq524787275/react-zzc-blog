@@ -6,9 +6,15 @@ import {getAbout} from "http/okgo.jsx";
 import ProgressButton from "components/CustomButtons/ProgressButton.jsx";
 import {updateAbout} from "../../http/okgo";
 import ActionMessage from "../../action/ActionMessage";
+import HeaderCard from "components/Cards/HeaderCard.jsx";
 
 const styles = {
     root: {},
+    header:{
+        "&:hover":{
+            fontWeight:"bold",
+        }
+    }
 };
 
 class About extends Component {
@@ -89,13 +95,22 @@ class About extends Component {
         console.debug(this.content);
     }
 
+    go=()=>{
+        window.open("http://localhost:3000/about")
+    }
+
     render() {
         const {classes} = this.props;
         //const { } = this.state;
         return (
             <div className={classes.root}>
-                {this.state.edit}
-                {this.state.submit}
+                <HeaderCard cardTitle={<div className={classes.header} onClick={this.go}>更新关于信息</div>}
+                            content={
+                                <div>
+                                    {this.state.edit}
+                                    {this.state.submit}
+                                </div>
+                }/>
             </div>
         );
     }
