@@ -18,6 +18,8 @@ const hist = createBrowserHistory();
 @observer
 class App extends Component {
 
+
+
     dataManager = ActionMesage.getInstance();
 
     render() {

@@ -6,12 +6,11 @@ import IconCard from "components/Cards/IconCard.jsx";
 import ReactList from 'react-list';
 import {CircularProgress} from 'material-ui/Progress';
 import InfiniteScroll from 'react-infinite-scroller';
-import Typography from 'material-ui/Typography';
 import Favorite from '@material-ui/icons/Favorite';
-import {getArticleList} from '../../http/okgo';
+import {getArticleVisibelList} from '../../http/okgo';
 import {timestampToTime} from '../../uitls/ProjectDateUtils';
-import {Fade} from 'material-ui/transitions';
-import {TransitionGroup} from 'react-transition-group';
+import Quote from "components/Typography/Quote.jsx";
+
 class Article extends Component {
 
     constructor(props, context) {
@@ -51,17 +50,14 @@ class Article extends Component {
     }
 
     loadAricleList = async (page, size) => {
-        let response = await getArticleList(page, size);
-
-        console.debug(response.result.lastPage);
-        console.debug(page);
-
+        try {
+        let response = await getArticleVisibelList(page, size);
         if (response.result.lastPage < page) {
             this.setState({
                 ...this.state, hasMore: false
             })
             return;
-        } else if(response.result.lastPage===1){
+        } else if (response.result.lastPage === 1) {
             this.setState({
                 ...this.state,
                 hasMore: false,
@@ -73,6 +69,9 @@ class Article extends Component {
             ...this.state,
             list: [...this.state.list, ...response.result.list],
         })
+        }catch (e){
+            console
+        }
     }
 
     loadMore = (page) => {
@@ -81,28 +80,27 @@ class Article extends Component {
 
     renderItem = (index, key) => {
         return (
-            <div key={index} onClick={()=>{
-                window.open("/article/detail/"+this.state.list[index].id);
+            <div key={index} onClick={() => {
+                window.open("/article/detail/" + this.state.list[index].id);
                 // this.props.history.location.open("/article/detail/"+);
             }}>
                 <IconCard iconColor={"rose"} icon={Favorite} content={
-                    <div style={{height: 150}}>
-                        <Typography variant={"display1"}
-                                    style={{color: "#333333"}}>{this.state.list[index].title}</Typography>
-                        <Typography style={{marginTop: 20}}
-                                    variant={"body1"}>{this.state.list[index].description}</Typography>
-                        <div style={{
+                    <div style={{minHeight: 150}}>
+                        <h3
+                            style={{color: "#333333"}}>{this.state.list[index].title}</h3>
+                        <Quote style={{marginTop: 20}}
+                               text={this.state.list[index].description}
+                               ></Quote>
+                        <h6 style={{
                             position: "absolute",
                             bottom: "0px",
                             right: "0px",
                             marginRight: 20,
                             marginBottom: 10,
                             color: "#000",
-                            fontStyle: "italic",
-                            fontWeight: "bold"
                         }}>
                             {timestampToTime(this.state.list[index].date)}
-                        </div>
+                        </h6>
                     </div>
                 }></IconCard>
             </div>
@@ -115,22 +113,24 @@ class Article extends Component {
         return (
             <div className={classes.content}>
                 <div className={classes.container}>
-                    <InfiniteScroll
-                        initialLoad={false}
-                        pageStart={1}
-                        hasMore={!this.state.loading && this.state.hasMore}
-                        loader={<div key={-1} style={{width: "100%", display: "flex", justifyContent: "center"}}>
-                            <CircularProgress style={{color: "#fff"}}></CircularProgress>
-                        </div>}
-                        useWindow={true}
-                        loadMore={this.loadMore}>
+                    <div style={{marginLeft: "10vw", marginRight: "10vw"}}>
+                        <InfiniteScroll
+                            initialLoad={false}
+                            pageStart={1}
+                            hasMore={!this.state.loading && this.state.hasMore}
+                            loader={<div key={-1} style={{width: "100%", display: "flex", justifyContent: "center"}}>
+                                <CircularProgress style={{color: "#fff"}}></CircularProgress>
+                            </div>}
+                            useWindow={true}
+                            loadMore={this.loadMore}>
                             <ReactList
                                 axis='y'
                                 itemRenderer={this.renderItem}
                                 length={this.state.list.length}
                                 type='uniform'>
                             </ReactList>
-                    </InfiniteScroll>
+                        </InfiniteScroll>
+                    </div>
                 </div>
             </div>
         );

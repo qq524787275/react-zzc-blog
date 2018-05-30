@@ -1529,7 +1529,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.1.3, classnames@^2.2.5:
+classnames@^2.1.3, classnames@^2.2.1, classnames@^2.2.5, classnames@latest:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
@@ -2029,6 +2029,10 @@ dashdash@^1.12.0:
 date-arithmetic@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/date-arithmetic/-/date-arithmetic-3.1.0.tgz#1fcd03dbd504b9dbee2b9078c85a5f1c7d3cc2d3"
+
+date-fns@2.0.0-alpha.7:
+  version "2.0.0-alpha.7"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.0.0-alpha.7.tgz#245ad16f95764eababfb2c0a41fd5d033c20e57a"
 
 date-now@^0.1.4:
   version "0.1.4"
@@ -6122,7 +6126,7 @@ prop-types-extra@^1.0.1:
     react-is "^16.3.2"
     warning "^3.0.0"
 
-prop-types@15, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1:
+prop-types@15, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@latest:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
   dependencies:
@@ -6288,6 +6292,15 @@ react-chartist@0.13.1:
   resolved "https://registry.yarnpkg.com/react-chartist/-/react-chartist-0.13.1.tgz#79cee44891dfd7008d555a7a5a623ab09c0b59d1"
   dependencies:
     prop-types "^15.5.8"
+
+react-date-range@^1.0.0-alpha6:
+  version "1.0.0-alpha6"
+  resolved "https://registry.yarnpkg.com/react-date-range/-/react-date-range-1.0.0-alpha6.tgz#c76669b3b0d7322d59f5c5eb0df119577dd0827d"
+  dependencies:
+    classnames "^2.2.1"
+    date-fns "2.0.0-alpha.7"
+    prop-types "^15.5.10"
+    react-list "^0.8.8"
 
 react-datetime@2.14.0:
   version "2.14.0"
@@ -6581,6 +6594,12 @@ react-table@6.8.0:
 react-tagsinput@3.19.0:
   version "3.19.0"
   resolved "https://registry.yarnpkg.com/react-tagsinput/-/react-tagsinput-3.19.0.tgz#6e3b45595f2d295d4657bf194491988f948caabf"
+
+react-textarea-autosize@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/react-textarea-autosize/-/react-textarea-autosize-6.1.0.tgz#df91387f8a8f22020b77e3833c09829d706a09a5"
+  dependencies:
+    prop-types "^15.6.0"
 
 react-transition-group@^2.2.1, react-transition-group@^2.3.1:
   version "2.3.1"

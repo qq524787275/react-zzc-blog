@@ -75,9 +75,8 @@ class Editor extends Component {
         return (
             <div className={classes.root}>
                 {/* 将生成编辑器 */}
-                <div ref={"toolElem"} style={{border:"1px solid #ccc",backgroundColor:"#fff"}}></div>
-                <div ref="editorElem" style={{textAlign: 'left',border:"1px solid #ccc",height:400,backgroundColor:"#fff"}}>
-
+                <div ref={"toolElem"} style={{border:"1px solid #ccc",backgroundColor:"#fff",flexWrap:"wrap"}}></div>
+                <div ref="editorElem" style={{textAlign: 'left',border:"1px solid #ccc",height:400,backgroundColor:"#fff"}} >
                 </div>
             </div>
         );

@@ -65,7 +65,7 @@ class UserList extends Component {
                                nextLabel={"下一页"}
                                breakLabel={<a href="">...</a>}
                                breakClassName={"break"}
-                               pageCount={this.state.result.lastPage}
+                               pageCount={data.result.pages}
                                marginPagesDisplayed={1}
                                pageRangeDisplayed={3}
                                onPageChange={this.handlePageClick}
@@ -104,11 +104,11 @@ class UserList extends Component {
                             title={"用户列表信息"}
                             footer={
                                 this.state.paginate
-
                             }
                             content={
                                 <div>
                                     <Table
+                                        hover
                                         tableHead={[
                                             "id",
                                             "Username",

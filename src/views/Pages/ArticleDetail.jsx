@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {withStyles} from 'material-ui/styles';
-import {getArticleDetial} from "../../http/okgo";
+import {getArticleVisibleDetail} from "../../http/okgo";
 import articleDetailStyle from "assets/jss/material-dashboard-pro-react/pages/articleDetailStyle.jsx";
 import bgImage from "assets/img/image-mingren.jpg";
 import FullHeaderCard from "components/Cards/FullHeaderCard.jsx";
@@ -43,7 +43,7 @@ class ArticleDetail extends Component {
     }
 
     loadGetArticleDetial = async (id) => {
-        let response = await getArticleDetial(id);
+        let response = await getArticleVisibleDetail(id);
         if (response.status !== 1) {
             this.props.history.replace("/article");
             return;

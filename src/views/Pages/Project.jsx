@@ -14,7 +14,7 @@ import {Fade} from 'material-ui/transitions';
 
 class Project extends Component {
     state = {
-        data: "",
+        data: null,
         height: window.innerHeight,
     };
 
@@ -42,9 +42,14 @@ class Project extends Component {
     }
 
     loadProjectData = async (page, size) => {
+        try {
         let response = await projectList(page, size);
-        this.setState({data: response.result});
-        console.debug(this.state.data);
+        if(response.status===1){
+            this.setState({data: response.result});
+        }
+        }catch (e){
+            console.debug(e);
+        }
     }
 
     onImageClick = (link) => {
@@ -59,7 +64,7 @@ class Project extends Component {
                 <div className={classes.container}>
                     <GridContainer>
                         {
-                            this.state.data !== "" ?
+                            this.state.data !==  null?
                                 this.state.data.list.map(function (item, key) {
                                     console.debug(item);
                                     return (

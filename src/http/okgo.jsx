@@ -16,44 +16,65 @@ export const addUser = (username, password) => http(baseUrl + "/api/admin/add", 
     password: password
 }, 'POST');
 
-export const getUserList=(page,size)=> http(baseUrl+"/api/admin/list",{
-    page:page,
-    size:size
-},"POST");
+export const getUserList = (page, size) => http(baseUrl + "/api/admin/list", {
+    page: page,
+    size: size
+}, "POST");
 
-export const getArticleDetial=(id)=>http(baseUrl+"/api/article/detail",{
-    id:id,
-},"POST");
+export const getArticleDetial = (id) => http(baseUrl + "/api/article/detail", {
+    id: id,
+}, "POST");
 
-export const pushArticle=(title,description,content)=>http(baseUrl+"/api/article/add",{
-    title:title,
-    description:description,
-    content:content
-},"POST");
+export const upDateArticle = (data) => http(baseUrl + "/api/article/update", {
+    id: data.id,
+    title: data.title,
+    description: data.description,
+    content: data.content,
+}, "POST")
 
-export const getArticleList=(page,size)=>http(baseUrl+"/api/article/list",{
-    page:page,
-    size:size
-},"POST");
+export const getArticleVisibleDetail = (id) => http(baseUrl + "/api/article/visibleDetail", {
+    id: id,
+}, "POST");
 
-export const projectList=(page,size)=>http(baseUrl+"/api/project/list",{
-    page:page,
-    size:size
-},"GET");
+export const setArticleVisible = (id, visible) => http(baseUrl + "/api/article/visible", {
+    id: id,
+    visible: visible
+}, "POST");
 
-export const guestbookList=(page,size)=>http(baseUrl+"/api/guestbook/list",{
-    page:page,
-    size:size
-},"GET");
+export const pushArticle = (title, description, content) => http(baseUrl + "/api/article/add", {
+    title: title,
+    description: description,
+    content: content
+}, "POST");
 
-export const addGuestbook=(nickname,content)=>http(baseUrl+"/api/guestbook/add",{
-    nickname:nickname,
-    content:content
-},"POST")
+export const getArticleList = (page, size) => http(baseUrl + "/api/article/list", {
+    page: page,
+    size: size
+}, "POST");
 
-export const getAbout=()=>http(baseUrl+"/api/about/getAbout","","GET")
+export const getArticleVisibelList = (page, size) => http(baseUrl + "/api/article/visibleList", {
+    page: page,
+    size: size
+}, "POST");
 
-export const updateAbout=(content)=>http(baseUrl+"/api/about/update",{
-    content:content,
-},"POST")
+export const projectList = (page, size) => http(baseUrl + "/api/project/list", {
+    page: page,
+    size: size
+}, "GET");
+
+export const guestbookList = (page, size) => http(baseUrl + "/api/guestbook/list", {
+    page: page,
+    size: size
+}, "GET");
+
+export const addGuestbook = (nickname, content) => http(baseUrl + "/api/guestbook/add", {
+    nickname: nickname,
+    content: content
+}, "POST")
+
+export const getAbout = () => http(baseUrl + "/api/about/getAbout", "", "GET")
+
+export const updateAbout = (content) => http(baseUrl + "/api/about/update", {
+    content: content,
+}, "POST")
 
