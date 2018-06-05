@@ -31,6 +31,9 @@ class ImageUpload extends React.Component {
       });
     };
     reader.readAsDataURL(file);
+    if(this.props.onSelect){
+      this.props.onSelect(file);
+    }
   }
   handleSubmit(e) {
     e.preventDefault();
@@ -59,16 +62,16 @@ class ImageUpload extends React.Component {
         <div>
           {this.state.file === null ? (
             <Button round color="rose" onClick={() => this.handleClick()}>
-              {this.props.avatar ? "Add Photo" : "Select image"}
+              {this.props.avatar ? "Add Photo" : "选择图片"}
             </Button>
           ) : (
             <span>
               <Button round color="rose" onClick={() => this.handleClick()}>
-                Change
+                选择
               </Button>
               {this.props.avatar ? <br /> : null}
               <Button color="danger" round onClick={() => this.handleRemove()}>
-                <i className="fa fa-times" /> Remove
+                <i className="fa fa-times" /> 取消
               </Button>
             </span>
           )}

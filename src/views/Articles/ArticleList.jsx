@@ -15,23 +15,22 @@ import ItemGrid from "components/Grid/ItemGrid.jsx";
 import CustomInput from 'components/CustomInput/CustomInput';
 import Editor from 'components/Editor/Editor';
 import {CircularProgress} from 'material-ui/Progress';
-import {getArticleList, getArticleDetial,setArticleVisible,upDateArticle} from '../../http/okgo';
-import {timestampToTime} from '../../uitls/ProjectDateUtils';
+import {getArticleList, getArticleDetial, setArticleVisible, upDateArticle} from '../../http/okgo';
+import {timestampToTime} from 'uitls/ProjectDateUtils';
 import ReactPaginate from 'react-paginate';
 import {Fade} from 'material-ui/transitions';
 
 import Switch from "material-ui/Switch";
-import {observer} from "mobx-react";
-import ActionMessage from "../../action/ActionMessage";
+import OnToastEvent from "action/OnToastEvent";
+import RxBus from "uitls/RxBus";
 
-@observer
 class ArticleList extends Component {
 
     constructor(props, context) {
         super(props, context);
         this.page = 1;
         this.size = 5;
-        this.data={}
+        this.data = {}
     }
 
     state = {
@@ -65,50 +64,50 @@ class ArticleList extends Component {
 
     }
 
-    handleChange=(event)=>{
+    handleChange = (event) => {
 
-        this.data={
+        this.data = {
             ...this.data,
             [event.target.id]: event.target.value
         }
         console.debug(this.data);
     }
 
-    onChange=(content)=>{
-        this.data.content=content;
+    onChange = (content) => {
+        this.data.content = content;
         console.debug(this.data.content);
     }
 
-    submit=()=>{
+    submit = () => {
         this.loadUpdateArticle(this.data);
     }
 
-    loadArticleVisible =async(id,visible)=>{
-       let response= await setArticleVisible(id,visible);
-       if(response.status===1){
-           this.loadGetArticleList(this.page, this.size);
-       }else{
-           ActionMessage.getInstance().showMessage(response.msg,"danger");
-       }
+    loadArticleVisible = async (id, visible) => {
+        let response = await setArticleVisible(id, visible);
+        if (response.status === 1) {
+            this.loadGetArticleList(this.page, this.size);
+        } else {
+            RxBus.getInstance().post(new OnToastEvent(response.msg, "danger"));
+        }
     }
 
-    loadUpdateArticle= async(data)=>{
-        let response= await upDateArticle(data);
-        if(response.status===1){
-            ActionMessage.getInstance().showMessage("修改成功!~","success");
-        }else{
-            ActionMessage.getInstance().showMessage(response.msg,"danger");
+    loadUpdateArticle = async (data) => {
+        let response = await upDateArticle(data);
+        if (response.status === 1) {
+            RxBus.getInstance().post(new OnToastEvent("修改成功", "success"));
+        } else {
+            RxBus.getInstance().post(new OnToastEvent(response.msg, "danger"));
         }
     }
 
     loadArticleDetail = async (item) => {
         this.setState({
             ...this.state,
-            update:null
-        },async()=> {
+            update: null
+        }, async () => {
 
             let response = await getArticleDetial(item.id);
-            this.data=response.result
+            this.data = response.result
             this.setState({
                 ...this.state,
                 update: (
@@ -177,7 +176,7 @@ class ArticleList extends Component {
 
 
     handlePageClick = (a) => {
-        this.page=a.selected + 1;
+        this.page = a.selected + 1;
         this.loadGetArticleList(this.page, this.size);
     }
 
@@ -236,9 +235,9 @@ class ArticleList extends Component {
                                             item.description,
                                             timestampToTime(item.date),
                                             item.love,
-                                            <Switch key={"switch"} checked={item.visible} onChange={()=>{
+                                            <Switch key={"switch"} checked={item.visible} onChange={() => {
                                                 console.debug(item);
-                                                this.loadArticleVisible(item.id,item.visible===true?0:1);
+                                                this.loadArticleVisible(item.id, item.visible === true ? 0 : 1);
                                             }}/>,
                                             [
                                                 <Button color={"success"} customClass={classes.actionButton}
@@ -250,7 +249,7 @@ class ArticleList extends Component {
                                                 ,
                                                 <Button color={"danger"} customClass={classes.actionButton}
                                                         key={"close"} onClick={() => {
-                                                    ActionMessage.getInstance().showMessage("不支持删除","danger");
+                                                    RxBus.getInstance().post(new OnToastEvent("不支持删除", "danger"));
                                                 }}>
                                                     <Close className={classes.icon}/>
                                                 </Button>

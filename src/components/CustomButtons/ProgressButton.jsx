@@ -3,6 +3,7 @@ import {withStyles} from 'material-ui/styles';
 import {CircularProgress} from 'material-ui/Progress';
 import Button from 'material-ui/Button';
 import pink from 'material-ui/colors/pink';
+import PropTypes from 'prop-types';
 
 const styles = theme => ({
     root: {
@@ -32,15 +33,11 @@ const styles = theme => ({
 
 class ProgressButton extends Component {
 
-
-
-
-
     render() {
-        const {classes,onClick,loading} = this.props;
+        const {classes,onClick,loading,...rest} = this.props;
 
         return (
-            <div className={classes.root}>
+            <div {...rest} className={classes.root}>
                 <div className={classes.wrapper}>
                     <Button
                         variant="raised"
@@ -56,6 +53,14 @@ class ProgressButton extends Component {
             </div>
         );
     }
+}
+
+ProgressButton.defaultProps = {
+    loading:false,
+}
+ProgressButton.propTypes = {
+    loading:PropTypes.bool,
+    onClick:PropTypes.func
 }
 
 export default withStyles(styles)(ProgressButton);

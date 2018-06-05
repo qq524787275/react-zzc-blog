@@ -4,8 +4,16 @@ import {DateRange} from 'react-date-range';
 import {default as zhCN} from 'react-date-range/dist/locale/zh-CN';
 import BootstrapInput from 'components/CustomInput/BootstrapInput';
 import BootstrapTextarea from 'components/CustomInput/BootstrapTextarea';
+import ImageUpload from "components/CustomUpload/ImageUpload.jsx";
+import ProgressButton from "components/CustomButtons/ProgressButton.jsx";
+import GridContainer from "components/Grid/GridContainer.jsx";
+import ItemGrid from "components/Grid/ItemGrid.jsx";
+
 const styles = {
-    root: {},
+    root: {
+        paddingLeft: 30,
+        paddingRight: 30
+    },
 };
 
 class ProjectAdd extends Component {
@@ -49,9 +57,17 @@ class ProjectAdd extends Component {
         })
     }
 
-    handleChange=(a)=>{
+    handleChange = (a) => {
         console.debug(a.target.id);
         console.debug(a.target.value);
+    }
+
+    submit = () => {
+
+    }
+
+    seletImage = (file) => {
+        console.debug(file);
     }
 
     render() {
@@ -59,17 +75,37 @@ class ProjectAdd extends Component {
         //const { } = this.state;
         return (
             <div className={classes.root}>
-
-                {/*<DateRange*/}
-                {/*rangeColors={["#E91E63"]}*/}
-                {/*locale={zhCN}*/}
-                {/*onChange={this.handleRangeChange}*/}
-                {/*moveRangeOnFirstSelection={false}*/}
-                {/*ranges={[this.state.dataRange]}*/}
-                {/*className={classes.PreviewArea}*/}
-                {/*/>*/}
-                <BootstrapInput id={"title"} lable={"项目名"}></BootstrapInput>
-                <BootstrapTextarea id={"description"} lable={"描述信息"} onChange={this.handleChange}></BootstrapTextarea>
+                <GridContainer direction={"column"} alignItems={"flex-start"}>
+                    <GridContainer>
+                        <ItemGrid md={6} xs={12} style={{marginLeft: 20}}>
+                            <BootstrapInput
+                                id={"title"}
+                                lable={"项目名"}/>
+                            <BootstrapInput
+                                id={"link"}
+                                lable={"链接"}
+                                style={{marginTop: 20}}/>
+                            <BootstrapInput
+                                id={"startDate"}
+                                lable={"开始时间"}
+                                style={{marginTop: 20}}/>
+                            <BootstrapInput
+                                id={"endDate"}
+                                lable={"结束时间"}
+                                style={{marginTop: 20}}/>
+                            <BootstrapTextarea
+                                id={"description"}
+                                lable={"描述信息"}
+                                onChange={this.handleChange}
+                                style={{marginTop: 20}}
+                            />
+                        </ItemGrid>
+                        <ItemGrid md={5} xs={12} style={{margin: 20}}>
+                            <ImageUpload onSelect={this.seletImage}/>
+                        </ItemGrid>
+                    </GridContainer>
+                    <ProgressButton style={{marginLeft:40,marginTop:20}} onClick={this.submit}>添加</ProgressButton>
+                </GridContainer>
             </div>
         );
     }

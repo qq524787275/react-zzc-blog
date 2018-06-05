@@ -2,17 +2,17 @@ import React, {Component} from 'react';
 import {withStyles} from 'material-ui/styles';
 
 import Editor from 'components/Editor/Editor.jsx';
-import {getAbout} from "http/okgo.jsx";
+import {getAbout, updateAbout} from "http/okgo.jsx";
 import ProgressButton from "components/CustomButtons/ProgressButton.jsx";
-import {updateAbout} from "../../http/okgo";
-import ActionMessage from "../../action/ActionMessage";
 import HeaderCard from "components/Cards/HeaderCard.jsx";
+import OnToastEvent from "../../action/OnToastEvent";
+import RxBus from "../../uitls/RxBus";
 
 const styles = {
     root: {},
-    header:{
-        "&:hover":{
-            fontWeight:"bold",
+    header: {
+        "&:hover": {
+            fontWeight: "bold",
         }
     }
 };
@@ -61,27 +61,25 @@ class About extends Component {
         this.loadUpdateAbout(this.content);
     }
 
-    loadGetAbout = async () => {
-        let response = await getAbout();
+    loadGetAbout =async () => {
+        let response=await getAbout();
         this.content = response.result.content;
         this.setState({
             ...this.state,
             edit: (<Editor onChange={this.onChange} init={this.content}></Editor>),
             submit: (<ProgressButton loading={false} onClick={this.submit}/>)
         })
-        console.debug(response);
     }
 
     loadUpdateAbout = async (content) => {
         try {
             let response = await updateAbout(content);
             if (response.status === 1) {
-                ActionMessage.getInstance().showMessage("修改成功~！", "success");
             } else {
-                ActionMessage.getInstance().showMessage(response.msg, "danger");
+                RxBus.getInstance().post(new OnToastEvent(response.msg,"danger"));
             }
         } catch (e) {
-            ActionMessage.getInstance().showMessage("网络异常", "danger");
+            RxBus.getInstance().post(new OnToastEvent("网路异常","danger"));
         } finally {
             this.setState({
                 ...this.state,
@@ -95,7 +93,7 @@ class About extends Component {
         console.debug(this.content);
     }
 
-    go=()=>{
+    go = () => {
         window.open("http://localhost:3000/about")
     }
 
@@ -110,7 +108,7 @@ class About extends Component {
                                     {this.state.edit}
                                     {this.state.submit}
                                 </div>
-                }/>
+                            }/>
             </div>
         );
     }

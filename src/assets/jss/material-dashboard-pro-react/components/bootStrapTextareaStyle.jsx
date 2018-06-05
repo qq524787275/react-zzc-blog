@@ -16,7 +16,6 @@ const bootStrapTextareaStyle = theme => ({
         border: '1px solid #ced4da',
         fontSize: 16,
         padding: '10px 12px',
-        resize: "none",
         transition: theme.transitions.create(['border-color', 'box-shadow']),
         fontFamily: [
             '-apple-system',
@@ -39,7 +38,6 @@ const bootStrapTextareaStyle = theme => ({
         },
     },
     cssLabel: {
-        marginTop: theme.spacing.unit * 3,
         marginBottom: theme.spacing.unit,
         fontSize: 14,
         marginLeft: theme.spacing.unit,

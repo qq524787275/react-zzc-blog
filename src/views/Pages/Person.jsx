@@ -122,7 +122,7 @@ class Person extends Component {
             <div className={classes.content}>
                 <div className={classes.container}>
                     <Zoom in={true} timeout={{enter: 500, exit: 500}}>
-                        <div style={{height: this.state.height - 200, paddingTop: 60}}>
+                        <div>
                             <ProfileCard
                                 avatar={avatar}
                                 subtitle="专业:软件工程　工作:Android开发"

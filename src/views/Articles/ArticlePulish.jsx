@@ -8,12 +8,12 @@ import ItemGrid from "components/Grid/ItemGrid.jsx";
 import CustomInput from 'components/CustomInput/CustomInput';
 import Button from 'components/CustomButtons/Button';
 import Editor from 'components/Editor/Editor';
-import ActionMesage from "action/ActionMessage"
 
 import {CircularProgress} from 'material-ui/Progress';
 
-import {pushArticle} from "../../http/okgo";
-import ActionMessage from "../../action/ActionMessage";
+import {pushArticle} from "http/okgo";
+import OnToastEvent from "action/OnToastEvent";
+import RxBus from "uitls/RxBus";
 
 const styles = {
     root: {},
@@ -21,16 +21,14 @@ const styles = {
         height: 250,
         border: "1px solid #efefef",
     },
-    header:{
-        "&:hover":{
-            fontWeight:"bold",
+    header: {
+        "&:hover": {
+            fontWeight: "bold",
         }
     }
 };
 
 class ArticlePulish extends Component {
-
-    a = ActionMesage.getInstance();
 
     constructor(props, context) {
         super(props, context);
@@ -70,10 +68,10 @@ class ArticlePulish extends Component {
         try {
             let result = await pushArticle(title, decription, content);
             if (result === null || result.status === -1) {
-                ActionMessage.getInstance().showMessage(result.msg, "danger");
+                RxBus.getInstance().post(new OnToastEvent(result.msg, "danger"));
                 console.debug("数据请求失败");
             } else {
-                ActionMesage.getInstance().showMessage(result.msg, "success");
+                RxBus.getInstance().post(new OnToastEvent(result.msg, "success"));
                 this.setState({
                     ...this.state,
                     title: "",
@@ -81,7 +79,7 @@ class ArticlePulish extends Component {
             }
         } catch (e) {
             console.debug(e);
-            ActionMesage.getInstance().showMessage("网络异常");
+            RxBus.getInstance().post(new OnToastEvent("网络异常", "danger"));
         } finally {
             this.setState({
                 isSubmitting: false,
@@ -109,7 +107,7 @@ class ArticlePulish extends Component {
         this.content = content;
     }
 
-    go=()=>{
+    go = () => {
 
     }
 

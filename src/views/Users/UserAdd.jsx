@@ -12,7 +12,8 @@ import Button from "components/CustomButtons/Button.jsx";
 import regularFormsStyle from "assets/jss/material-dashboard-pro-react/views/regularFormsStyle";
 
 import {addUser} from "http/okgo";
-import ActionMessage from "../../action/ActionMessage";
+import OnToastEvent from "action/OnToastEvent";
+import RxBus from "uitls/RxBus";
 
 class UserAdd extends Component {
     state = {
@@ -47,9 +48,9 @@ class UserAdd extends Component {
     submit=async ()=>{
         let result=await addUser(this.state.username,this.state.password);
         if(result.status===1){
-            ActionMessage.getInstance().showMessage(result.msg,"success");
+            RxBus.getInstance().post(new OnToastEvent(result.msg, "success"));
         }else {
-            ActionMessage.getInstance().showMessage(result.msg,"danger");
+            RxBus.getInstance().post(new OnToastEvent(result.msg, "danger"));
         }
 
         console.debug(result);

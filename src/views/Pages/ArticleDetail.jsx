@@ -5,6 +5,7 @@ import articleDetailStyle from "assets/jss/material-dashboard-pro-react/pages/ar
 import bgImage from "assets/img/image-mingren.jpg";
 import FullHeaderCard from "components/Cards/FullHeaderCard.jsx";
 import {Fade} from 'material-ui/transitions';
+import Button from 'material-ui/Button';
 
 class ArticleDetail extends Component {
 
@@ -55,7 +56,11 @@ class ArticleDetail extends Component {
                 <Fade in={true} timeout={{enter: 500, exit: 500}}>
                     <div style={{width: "70vw", marginLeft: "15vw", marginTop: "10vh"}}>
                         <FullHeaderCard cardTitle={<div
-                            style={{textAlign: "center", fontSize: "1.5em", fontWeight: "bold"}}>{response.result.title}</div>}
+                            style={{
+                                textAlign: "center",
+                                fontSize: "1.5em",
+                                fontWeight: "bold"
+                            }}>{response.result.title}</div>}
                                         headerColor={"green"}
                                         content={<div style={{minHeight: "60vh"}}>
                                             <div dangerouslySetInnerHTML={{__html: response.result.content}}>
@@ -68,15 +73,19 @@ class ArticleDetail extends Component {
         console.debug(response);
     }
 
+    click=()=>{
+        console.debug(this.props.history.push("/index"));
+    }
+
     render() {
         const {classes} = this.props;
         //const { } = this.state;
         return (
             <div className={classes.wrapper}>
                 <div className={classes.fullPage}></div>
+                <Button onClick={this.click} style={{color:"#fff",zIndex:100,position :"fixed"}}>首页</Button>
                 <div className={classes.content}>
                     {this.state.card}
-
                 </div>
                 <div
                     className={classes.fullPageBackground}

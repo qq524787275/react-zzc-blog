@@ -20,13 +20,14 @@ import SweetAlert from 'react-bootstrap-sweetalert';
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 
 import {guestbookList, addGuestbook} from "http/okgo";
-import ActionMessage from "../../action/ActionMessage";
 
 import ReactPaginate from 'react-paginate';
 
 import Paper from 'material-ui/Paper';
 
 import {timestampToTime} from '../../uitls/ProjectDateUtils';
+import RxBus from "../../uitls/RxBus";
+import OnToastEvent from "../../action/OnToastEvent";
 class Guestbook extends Component {
 
 
@@ -117,7 +118,7 @@ class Guestbook extends Component {
                 content: null,
             };
         } else {
-            ActionMessage.getInstance().showMessage(response.msg, "danger")
+            RxBus.getInstance().post(new OnToastEvent(response.msg, "danger"));
         }
         console.debug(response);
     }
@@ -143,7 +144,7 @@ class Guestbook extends Component {
             alert: (
                 <SweetAlert
                     showCancel
-                    style={{display: "block", marginTop: "-100px"}}
+                    style={{display: "block"}}
                     title="留言"
                     confirmBtnText={"确认"}
                     cancelBtnText={"取消"}

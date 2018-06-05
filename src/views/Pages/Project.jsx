@@ -43,11 +43,11 @@ class Project extends Component {
 
     loadProjectData = async (page, size) => {
         try {
-        let response = await projectList(page, size);
-        if(response.status===1){
-            this.setState({data: response.result});
-        }
-        }catch (e){
+            let response = await projectList(page, size);
+            if (response.status === 1) {
+                this.setState({data: response.result});
+            }
+        } catch (e) {
             console.debug(e);
         }
     }
@@ -64,11 +64,12 @@ class Project extends Component {
                 <div className={classes.container}>
                     <GridContainer>
                         {
-                            this.state.data !==  null?
+                            this.state.data !== null ?
                                 this.state.data.list.map(function (item, key) {
                                     console.debug(item);
                                     return (
-                                        <Fade key={key} style={{transitionDelay:key*100}} in={true} timeout={{enter:1000,exit:500}}>
+                                        <Fade key={key} style={{transitionDelay: key * 100}} in={true}
+                                              timeout={{enter: 1000, exit: 500}}>
                                             <ItemGrid xs={12} sm={12} md={3}>
                                                 <ImagePriceCard
                                                     image={item.image}

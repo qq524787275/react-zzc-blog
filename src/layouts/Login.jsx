@@ -19,7 +19,8 @@ import {withRouter} from "react-router-dom";
 
 import {login as okLogin} from 'http/okgo';
 
-import ActionMessage from "../action/ActionMessage";
+import OnToastEvent from "../action/OnToastEvent";
+import RxBus from "../uitls/RxBus";
 
 class Login extends Component {
     state = {
@@ -67,18 +68,15 @@ class Login extends Component {
         try {
             let result = await okLogin(username, password);
             if (result === null || result.status === -1) {
-                ActionMessage.getInstance().showMessage(result.msg,"danger");
-                console.debug("数据请求失败");
+                RxBus.getInstance().post(new OnToastEvent(result.msg,"danger"));
             } else if (result !== null && result.status === 1) {
                 localStorage.setItem("token", result.result);
-                console.debug(localStorage.getItem("token"));
-                ActionMessage.getInstance().hideMessgae();
                 window.location.replace("/admin/home");
                 return;
             }
         }
         catch (e) {
-            ActionMessage.getInstance().showMessage("服务器异常");
+            RxBus.getInstance().post(new OnToastEvent("服务器异常","danger"));
         }
         this.setState({
             isLoading: false

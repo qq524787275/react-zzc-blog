@@ -32,6 +32,7 @@ class UserList extends Component {
 
     componentDidMount() {
         this.loadUserListData(1, 10);
+
     }
 
     componentWillReceiveProps() {
@@ -55,7 +56,7 @@ class UserList extends Component {
         this.loadUserListData(a.selected + 1, 10);
     }
 
-    loadUserListData = async (page, size) => {
+    loadUserListData =async (page, size) => {
         let data = await getUserList(page, size);
         this.setState({
             ...this.state,

@@ -2,7 +2,6 @@ import { container } from "assets/jss/material-dashboard-pro-react.jsx";
 
 const indexStyle={
     content: {
-        paddingTop: "100px",
         minHeight: "calc(100vh - 80px)",
         position: "relative",
         zIndex: "4",

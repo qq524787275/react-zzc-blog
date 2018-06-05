@@ -4,24 +4,57 @@ import {createBrowserHistory} from "history";
 import {Router, Route, Switch} from "react-router-dom";
 import indexRoutes from "./routes/index.jsx";
 import "./assets/scss/material-dashboard-pro-react.css?v=1.1.0";
-
 import AddAlert from "@material-ui/icons/AddAlert";
 import Snackbar from 'components/Snackbar/Snackbar.jsx';
-
-import {observer} from "mobx-react";
-
-import ActionMesage from "./action/ActionMessage"
-
-
+import RxBus from "./uitls/RxBus";
+import OnToastEvent from "./action/OnToastEvent";
 const hist = createBrowserHistory();
-
-@observer
+//babel-plugin-transform-decorators-legacy
 class App extends Component {
+    state = {
+        msg: "",
+        isShow: false,
+        color: "info"
+    };
 
+    componentWillMount() {
+        this.setOnToastEventListener();
+    }
 
+    //监听全局Toast事件 @see OnToastEvent
+    setOnToastEventListener = () => {
+        this.subscription = RxBus.getInstance()
+            .to(OnToastEvent.name)
+            .subscribe(data => {
+                if (!this.state.isShow) {
+                    this.setState({
+                        ...this.state,
+                        msg: data.msg,
+                        color: data.color,
+                        isShow: true
+                    }, () => {
+                        setTimeout(
+                            () => {
+                                this.setState({
+                                    ...this.state,
+                                    isShow: false
+                                })
+                            },
+                            1000
+                        );
+                    })
+                }
+            })
+    }
 
-    dataManager = ActionMesage.getInstance();
+    componentWillUnmount() {
+        this.subscription.dispose();
+    }
 
+    /**
+     *
+     * @returns {*}
+     */
     render() {
         //const { } = this.state;
         return (
@@ -29,12 +62,15 @@ class App extends Component {
                 <div>
                     <Snackbar
                         place={"bc"}
-                        message={this.dataManager.data.msg}
-                        color={this.dataManager.data.color}
+                        message={this.state.msg}
+                        color={this.state.color}
                         icon={AddAlert}
                         close
-                        closeNotification={() => this.dataManager.hideMessgae()}
-                        open={this.dataManager.data.isShow}></Snackbar>
+                        closeNotification={() => {
+                            this.setState({...this.state, isShow: false,})
+                        }}
+                        open={this.state.isShow}></Snackbar>
+
                     <Switch>
                         {indexRoutes.map((prop, key) => {
                             // if(prop.path=="/admin/login" && localStorage.getItem("token")!==""){

@@ -10,11 +10,12 @@ function BootstrapInput({...props}) {
         onChange,
         defaultValue,
         lable,
-        id
+        id,
+        ...rest,
     } = props
 
     return (
-        <div>
+        <div {...rest}>
             <TextField
                 defaultValue={defaultValue}
                 label={lable}

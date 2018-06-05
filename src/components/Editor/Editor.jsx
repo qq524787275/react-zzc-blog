@@ -6,7 +6,8 @@ import E from "wangeditor";
 import {
     uploadUrl
 } from 'http/env'
-import ActionMessage from "../../action/ActionMessage";
+import RxBus from "../../uitls/RxBus";
+import OnToastEvent from "../../action/OnToastEvent";
 class Editor extends Component {
 
     constructor(props) {
@@ -29,7 +30,7 @@ class Editor extends Component {
         editor.customConfig.uploadImgShowBase64 = false
         editor.customConfig.uploadImgMaxLength = 1
         editor.customConfig.customAlert = function (info) {
-            ActionMessage.getInstance().showMessage(info,"danger");
+            RxBus.getInstance().post(new OnToastEvent(info,"danger"));
         }
         editor.customConfig.customUploadImg = async (files, insert)=> {
             let file=files[0];

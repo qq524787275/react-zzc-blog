@@ -78,3 +78,8 @@ export const updateAbout = (content) => http(baseUrl + "/api/about/update", {
     content: content,
 }, "POST")
 
+export const addProject = (title, description) => http(baseUrl + "/api/project/add", {
+    title: title,
+    description: description
+}, "POST")
+
