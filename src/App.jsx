@@ -73,9 +73,6 @@ class App extends Component {
 
                     <Switch>
                         {indexRoutes.map((prop, key) => {
-                            // if(prop.path=="/admin/login" && localStorage.getItem("token")!==""){
-                            //     return <Redirect from={prop.path} to={"/admin/home"} key={key}/>;
-                            // }
                             return <Route path={prop.path} component={prop.component} key={key}/>;
                         })}
                     </Switch>

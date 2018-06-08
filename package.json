@@ -8,6 +8,7 @@
     "babel-polyfill": "^6.26.0",
     "chartist": "0.10.1",
     "clone": "^2.1.1",
+    "color": "^3.0.0",
     "history": "4.7.2",
     "material-ui": "1.0.0-beta.41",
     "moment": "2.22.1",

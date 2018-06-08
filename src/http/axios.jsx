@@ -13,13 +13,9 @@ const http = axios.create({
 });
 
 export default async (url = '', data = {}, type = 'GET') => {
-
     type = type.toUpperCase();
     // url = baseUrl + url;
-
-
     let response = null;
-
     try {
         if (type === "POST") {
             let params = new URLSearchParams();
