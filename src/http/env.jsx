@@ -8,7 +8,6 @@
  */
 let baseUrl = 'http://zhuzichu.com:8888';
 let uploadUrl= 'http://zhuzichu.com:8888/api/file/upload';
-
 // let baseUrl = 'http://localhost:8012';
 // let uploadUrl= 'http://localhost:8012/api/file/upload';
 
