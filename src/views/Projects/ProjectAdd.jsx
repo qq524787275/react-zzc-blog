@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {withStyles} from 'material-ui/styles';
-import {DateRange} from 'react-date-range';
-import {default as zhCN} from 'react-date-range/dist/locale/zh-CN';
 import BootstrapInput from 'components/CustomInput/BootstrapInput';
 import BootstrapTextarea from 'components/CustomInput/BootstrapTextarea';
 import ImageUpload from "components/CustomUpload/ImageUpload.jsx";

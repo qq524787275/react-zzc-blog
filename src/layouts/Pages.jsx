@@ -6,8 +6,29 @@ import pagesRoutes from "routes/pages.jsx";
 import FixedHeader from "components/Header/FixedHeader.jsx";
 import bgImage from "assets/img/image-mingren.jpg";
 import Footer from "components/Footer/Footer.jsx";
+
+const switchRoutes = (
+    <Switch>
+        {pagesRoutes.map((prop, key) => {
+            if (prop.redirect)
+                return <Redirect from={prop.path} to={prop.pathTo} key={key}/>;
+            if (prop.collapse) return null;
+
+            return (
+                <Route
+                    path={prop.path}
+                    component={prop.component}
+                    key={key}
+                />
+            );
+        })}
+    </Switch>
+);
+
+
 class Index extends Component {
     state = {};
+
 
     componentWillMount() {
 
@@ -48,25 +69,7 @@ class Index extends Component {
                     {...rest}  />
                 <div className={classes.wrapper} ref="wrapper">
                     <div className={classes.fullPage}>
-                        <Switch>
-                            {pagesRoutes.map((prop, key) => {
-                                if (prop.collapse) {
-                                    return null;
-                                }
-                                if (prop.redirect) {
-                                    return (
-                                        <Redirect from={prop.path} to={prop.pathTo} key={key}/>
-                                    );
-                                }
-                                return (
-                                    <Route
-                                        path={prop.path}
-                                        component={prop.component}
-                                        key={key}
-                                    />
-                                );
-                            })}
-                        </Switch>
+                        {switchRoutes}
                         <Footer white />
                         <div
                             className={classes.fullPageBackground}

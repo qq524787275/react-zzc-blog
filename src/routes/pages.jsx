@@ -65,7 +65,7 @@ const pagesRoutes = [
         redirect: true,
         path: "/",
         pathTo: "/index",
-        name: "首页"
+        name: "首页",
     }
 ];
 
