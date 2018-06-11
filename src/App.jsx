@@ -16,7 +16,6 @@ class App extends Component {
         isShow: false,
         color: "info"
     };
-
     componentWillMount() {
         this.setOnToastEventListener();
     }
