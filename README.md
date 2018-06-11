@@ -3,5 +3,5 @@ yarn install
 yarn start  
 或者  
 npm install  
-npm start
+npm start  
 [服务端](https://github.com/qq524787275/springboot-zzc-blog)  
