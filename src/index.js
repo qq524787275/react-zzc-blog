@@ -1,3 +1,9 @@
+import 'babel-polyfill';
+import 'core-js/es6/set';
+import 'core-js/es6/map';
+import 'raf/polyfill';
+import 'url-search-params-polyfill';
+//entry: ["babel-polyfill","./src/index.js"] ,
 import React from 'react';
 import ReactDOM from 'react-dom';
 import "./assets/scss/material-dashboard-pro-react.css?v=1.1.0";

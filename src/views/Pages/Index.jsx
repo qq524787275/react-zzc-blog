@@ -58,7 +58,7 @@ class Index extends Component {
         //快要死的雪花数组
         let arrDieSnow = [];
         //下雪规则
-        var rule = 0.5;
+        var rule = 0.05;
 
 
         let intval = setInterval(() => {

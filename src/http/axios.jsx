@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import {
     baseUrl
 } from 'http/env'
@@ -17,8 +16,10 @@ export default async (url = '', data = {}, type = 'GET') => {
     // url = baseUrl + url;
     let response = null;
     try {
+
         if (type === "POST") {
             let params = new URLSearchParams();
+            console.debug("执行了")
             Object.keys(data).forEach(key => {
                 params.append(key, data[key])
             })
