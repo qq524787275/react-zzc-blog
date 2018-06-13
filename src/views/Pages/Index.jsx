@@ -1,21 +1,35 @@
 import React, {Component} from 'react';
 import {withStyles} from 'material-ui/styles';
-import Banner from "react-slick";
-
+import 'wangeditor/release/wangEditor.css'
 import indexStyle from "assets/jss/material-dashboard-pro-react/pages/indexStyle.jsx";
-import Switch from "material-ui/Switch";
-import Favorite from "@material-ui/icons/Favorite";
-import Receipt from "@material-ui/icons/Receipt";
-
-import image1 from "assets/img/card-1.jpeg";
-import image2 from "assets/img/card-2.jpeg";
-import image3 from "assets/img/card-3.jpeg";
+// @material-ui/icons
+import AddLocation from "@material-ui/icons/AddLocation";
 import ItemGrid from "components/Grid/ItemGrid";
 import GridContainer from "components/Grid/GridContainer";
+// core components
+import IconCard from "components/Cards/IconCard.jsx";
+import {
+    withScriptjs,
+    withGoogleMap,
+    GoogleMap,
+    Marker
+} from "react-google-maps";
+import OnToastEvent from "../../action/OnToastEvent";
+import RxBus from "../../uitls/RxBus";
 
-import IconCard from "components/Cards/IconCard";
-import Snowflake from "../../spirit/Snowflake";
-import Color from "color";
+const RegularMap = withScriptjs(
+    withGoogleMap(props => (
+        <GoogleMap
+            defaultZoom={8}
+            defaultCenter={{lat: 39.9332495, lng: 116.3705649}}
+            defaultOptions={{
+                scrollwheel: true
+            }}
+        >
+            <Marker position={{lat: 39.9332495, lng: 116.3705649}}/>
+        </GoogleMap>
+    ))
+);
 
 class Index extends Component {
     state = {};
@@ -25,7 +39,7 @@ class Index extends Component {
     }
 
     componentDidMount() {
-
+        this.initWebSocket();
     }
 
     componentWillReceiveProps() {
@@ -41,80 +55,56 @@ class Index extends Component {
     }
 
     componentWillUnmount() {
-
+        this.websocket.close();
     }
 
-    drawCanvas = canvas => {
-        console.debug(Color.rgb(255, 255, 255).alpha(0.5))
-        if (!canvas) {
-            return
+    initWebSocket = () => {
+        this.websocket = null;
+        if ('WebSocket' in window) {
+            this.websocket = new WebSocket("ws://localhost:8012/websocket");
+        } else {
+            alert("不支持websocket");
+            return;
         }
-        console.debug(canvas);
-        canvas.width = window.innerWidth;
-        canvas.height = 1500;
-        let ctx = canvas.getContext("2d");
-        //雪花数组
-        let arrSnow = [];
-        //快要死的雪花数组
-        let arrDieSnow = [];
-        //下雪规则
-        var rule = 0.05;
-
-
-        let intval = setInterval(() => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            if (Math.random() < rule) {
-                let snowflake = new Snowflake();
-                snowflake.dieListener = function () {
-                    console.debug("死了一条雪花");
-                }
-                arrSnow.push(snowflake);
-            }
-            //画活雪花
-            arrSnow.forEach((item, index) => {
-                item.draw(ctx);
-            })
-
-            //画快要死的雪花
-            arrDieSnow.forEach((item, index) => {
-                item.draw(ctx);
-            })
-
-            arrSnow.forEach((item, index) => {
-                if (item.y > 500) {
-                    arrSnow.splice(index, 1);//
-                    arrDieSnow.push(item);
-                    item.die();
-                }
-            })
-
-            //优化 清除出界的死雪花
-            arrDieSnow.forEach((item, index) => {
-                if (item.y > 1500) {
-                    arrDieSnow.splice(index, 1);//
-                }
-            })
-        }, 16);
+        //连接发生错误的回调方法
+        this.websocket.onerror = () => {
+            console.debug("websocket发生错误");
+        };
+        this.websocket.onclose = () => {
+            console.debug("websocket关闭连接");
+        }
+        this.websocket.onopen = () => {
+            console.debug("websocket建立连接成功!")
+        }
+        this.websocket.onmessage = (event) => {
+            console.debug(event);
+            console.debug(event.data);
+            RxBus.getInstance().post(new OnToastEvent(event.data, "success"));
+        }
     }
 
     render() {
         const {classes} = this.props;
         return (
             <div className={classes.content}>
-                <div>
-                    <div style={{
-                        fontSize: 50,
-                        color: "#fff",
-                        position: "fixed",
-                        left: "0",
-                        right: "0",
-                        textAlign: "center",
-                        marginTop: 200
-                    }}>
-                        正在开发中
-                    </div>
-                </div>
-                <canvas style={{position: "absolute", top: "0", left: "0", zIndex: 2}} ref={this.drawCanvas}/>
+                <GridContainer style={{marginTop:100}}>
+                    <ItemGrid xs={12} sm={12} md={4}>
+                        <IconCard
+                            title="Regular Map"
+                            iconColor="rose"
+                            icon={AddLocation}
+                            content={
+                                <RegularMap
+                                    googleMapURL="http://ditu.google.cn/maps/api/js?v=3&key=AIzaSyC-K4_Tfnb-scqpM-wBa5MOPYXybTYjkYs&sensor=false"
+                                    loadingElement={<div style={{height: `100%`}}/>}
+                                    containerElement={<div
+                                        style={{height: "50vh", borderRadius: "6px", overflow: "hidden"}}/>}
+                                    mapElement={<div style={{height: `100%`}}/>}
+                                />
+                            }
+                        />
+                    </ItemGrid>
+                </GridContainer>
             </div>
         );
     }

@@ -4180,10 +4180,12 @@ code {
   font-size: 90%;
   color: #c7254e;
   background-color: #f9f2f4;
-  border-radius: 4px; }
+  border-radius: 4px;
+  word-wrap: break-word; }
 
 code, kbd, pre, samp {
-  font-family: Menlo,Monaco,Consolas,"Courier New",monospace; }
+  white-space: pre-wrap;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace; }
 
 img {
   vertical-align: middle;

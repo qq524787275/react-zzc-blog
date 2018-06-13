@@ -83,6 +83,58 @@ class Snowflake {
     set alpha(value) {
         this._alpha = value;
     }
+    // drawCanvas = canvas => {
+    //     console.debug(Color.rgb(255, 255, 255).alpha(0.5))
+    //     if (!canvas) {
+    //         return
+    //     }
+    //     console.debug(canvas);
+    //     canvas.width = window.innerWidth;
+    //     canvas.height = 1500;
+    //     let ctx = canvas.getContext("2d");
+    //     //雪花数组
+    //     let arrSnow = [];
+    //     //快要死的雪花数组
+    //     let arrDieSnow = [];
+    //     //下雪规则
+    //     var rule = 0.05;
+    //
+    //
+    //     let intval = setInterval(() => {
+    //         ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //         if (Math.random() < rule) {
+    //             let snowflake = new Snowflake();
+    //             snowflake.dieListener = function () {
+    //                 console.debug("死了一条雪花");
+    //             }
+    //             arrSnow.push(snowflake);
+    //         }
+    //         //画活雪花
+    //         arrSnow.forEach((item, index) => {
+    //             item.draw(ctx);
+    //         })
+    //
+    //         //画快要死的雪花
+    //         arrDieSnow.forEach((item, index) => {
+    //             item.draw(ctx);
+    //         })
+    //
+    //         arrSnow.forEach((item, index) => {
+    //             if (item.y > 500) {
+    //                 arrSnow.splice(index, 1);//
+    //                 arrDieSnow.push(item);
+    //                 item.die();
+    //             }
+    //         })
+    //
+    //         //优化 清除出界的死雪花
+    //         arrDieSnow.forEach((item, index) => {
+    //             if (item.y > 1500) {
+    //                 arrDieSnow.splice(index, 1);//
+    //             }
+    //         })
+    //     }, 16);
+    // }
 }
 
 export default Snowflake;
