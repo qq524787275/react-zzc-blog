@@ -75,6 +75,7 @@ class About extends Component {
         try {
             let response = await updateAbout(content);
             if (response.status === 1) {
+                RxBus.getInstance().post(new OnToastEvent("修改成功~","success"));
             } else {
                 RxBus.getInstance().post(new OnToastEvent(response.msg,"danger"));
             }

@@ -13,7 +13,6 @@ import {
     withGoogleMap,
     GoogleMap,
     Marker,
-    InfoWindow
 } from "react-google-maps";
 import OnToastEvent from "../../action/OnToastEvent";
 import RxBus from "../../uitls/RxBus";
@@ -47,6 +46,7 @@ class Index extends React.PureComponent {
     componentDidMount() {
         this.initWebSocket();
         window.isPageReady = 1
+
     }
 
     componentWillReceiveProps() {
@@ -147,12 +147,12 @@ class Index extends React.PureComponent {
                             iconColor="rose"
                             icon={AddLocation}
                             content={
-                                <div style={{width:"100%",height:320}}>
-
-                                </div>
+                                    <div  style={{width:"100%",height:320}}
+                                           />
                             }
                         />
                     </ItemGrid>
+
 
                     <ItemGrid xs={12} sm={12} md={4}>
                         <IconCard

@@ -1,6 +1,5 @@
 // import React from 'react';
 // import PropTypes from 'prop-types';
-// import flvjs from 'flv.js';
 // /**
 //  * react component wrap flv.js
 //  */
@@ -41,7 +40,7 @@
 //     }
 // }
 //
-// VideoPlayer.propTypes = {
+// FlvVideoPlayer.propTypes = {
 //     className: PropTypes.string,
 //     style: PropTypes.object,
 //     /**
