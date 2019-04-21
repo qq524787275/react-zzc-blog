@@ -81,44 +81,44 @@ class Article extends Component {
 
     renderItem = (index, key) => {
         return (
-            <div style={{cursor:"pointer",margin:30}} key={index} onClick={() => {
+            <div style={{cursor: "pointer", margin: 30}} key={index} onClick={() => {
                 window.open("/article/detail/" + this.state.list[index].id);
                 // this.props.history.location.open("/article/detail/"+);
             }}>
-                    <IconCard iconColor={"rose"} icon={Favorite} content={
-                        <div style={{minHeight: 150}}>
-                            <h3
-                                style={{color: "#333333"}}>{this.state.list[index].title}</h3>
-                            <Quote style={{marginTop: 20}}
-                                   text={this.state.list[index].description}
-                            ></Quote>
-                            <div style={{
-                                position: "absolute",
-                                bottom: "0px",
-                                right: "0px",
-                                marginRight: 20,
-                                marginBottom: 10,
-                                color: "#000",
-                            }}>
-                                <div style={{display: "inline", marginRight: 50, color: "#666666"}}>
-                                    <IconEye style={{
-                                        color: "#999999",
-                                        width: "16px",
-                                        height: "16px",
-                                        top: "2px",
-                                        position: "relative"
-                                    }}></IconEye>
-                                    {" "}
-                                    {this.state.list[index].eyes}
-                                </div>
-                                <div style={{
-                                    display: "inline",
-                                    fontWeight: "bold",
-                                    color: "#666666"
-                                }}>{timestampToTime(this.state.list[index].date)}</div>
+                <IconCard iconColor={"rose"} icon={Favorite} content={
+                    <div style={{minHeight: 150}}>
+                        <h3
+                            style={{color: "#333333"}}>{this.state.list[index].title}</h3>
+                        <Quote style={{marginTop: 20}}
+                               text={this.state.list[index].description}
+                        />
+                        <div style={{
+                            position: "absolute",
+                            bottom: "0px",
+                            right: "0px",
+                            marginRight: 20,
+                            marginBottom: 10,
+                            color: "#000",
+                        }}>
+                            <div style={{display: "inline", marginRight: 50, color: "#666666"}}>
+                                <IconEye style={{
+                                    color: "#999999",
+                                    width: "16px",
+                                    height: "16px",
+                                    top: "2px",
+                                    position: "relative"
+                                }}/>
+                                {" "}
+                                {this.state.list[index].eyes}
                             </div>
+                            <div style={{
+                                display: "inline",
+                                fontWeight: "bold",
+                                color: "#666666"
+                            }}>{timestampToTime(this.state.list[index].date)}</div>
                         </div>
-                    }></IconCard>
+                    </div>
+                }/>
             </div>
         );
     }
@@ -134,7 +134,7 @@ class Article extends Component {
                         pageStart={1}
                         hasMore={!this.state.loading && this.state.hasMore}
                         loader={<div key={-1} style={{width: "100%", display: "flex", justifyContent: "center"}}>
-                            <CircularProgress style={{color: "#fff"}}></CircularProgress>
+                            <CircularProgress style={{color: "#fff"}} />
                         </div>}
                         useWindow={true}
                         loadMore={this.loadMore}>

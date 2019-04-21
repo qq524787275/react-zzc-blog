@@ -34,7 +34,7 @@ function Footer({...props}) {
                         <ListItem className={classes.inlineBlock}>
                             <img src={github} alt="logo" style={{display:"inline",width:25,height:25}}/>
                             <a href="https://github.com/qq524787275" className={block} style={{display:"inline",margin:0,padding:10,textTransform:"capitalize"}}>
-                                {"gihub"}
+                                {"github"}
                             </a>
                         </ListItem>
                     </List>

@@ -163,7 +163,7 @@ class ArticlePulish extends Component {
                                             {
                                                 this.state.isSubmitting
                                                     ? <CircularProgress color={"secondary"}
-                                                                        style={{marginTop: 15}}></CircularProgress>
+                                                                        style={{marginTop: 15}} />
                                                     : <Button color={"rose"} onClick={this.submit}>提交</Button>
                                             }
                                         </ItemGrid>

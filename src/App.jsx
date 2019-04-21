@@ -8,7 +8,10 @@ import AddAlert from "@material-ui/icons/AddAlert";
 import Snackbar from 'components/Snackbar/Snackbar.jsx';
 import RxBus from "./uitls/RxBus";
 import OnToastEvent from "./action/OnToastEvent";
+import {CircularProgress} from 'material-ui/Progress';
+
 const hist = createBrowserHistory();
+
 //babel-plugin-transform-decorators-legacy
 class App extends Component {
     state = {
@@ -16,6 +19,7 @@ class App extends Component {
         isShow: false,
         color: "info"
     };
+
     componentWillMount() {
         this.setOnToastEventListener();
     }
@@ -58,24 +62,38 @@ class App extends Component {
         //const { } = this.state;
         return (
             <Router history={hist}>
-                <div>
-                    <Snackbar
-                        place={"bc"}
-                        message={this.state.msg}
-                        color={this.state.color}
-                        icon={AddAlert}
-                        close
-                        closeNotification={() => {
-                            this.setState({...this.state, isShow: false,})
-                        }}
-                        open={this.state.isShow}></Snackbar>
+                <React.Suspense
+                    fallback={
+                        <div style={{
+                            width: "100%",
+                            height: "100vh",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            background: "#333"
+                        }}>
+                            <CircularProgress style={{color: "#fff"}}/>
+                        </div>
+                    }>
+                    <div>
+                        <Snackbar
+                            place={"bc"}
+                            message={this.state.msg}
+                            color={this.state.color}
+                            icon={AddAlert}
+                            close
+                            closeNotification={() => {
+                                this.setState({...this.state, isShow: false,})
+                            }}
+                            open={this.state.isShow}/>
 
-                    <Switch>
-                        {indexRoutes.map((prop, key) => {
-                            return <Route path={prop.path} component={prop.component} key={key}/>;
-                        })}
-                    </Switch>
-                </div>
+                        <Switch>
+                            {indexRoutes.map((prop, key) => {
+                                return <Route path={prop.path} component={prop.component} key={key}/>;
+                            })}
+                        </Switch>
+                    </div>
+                </React.Suspense>
             </Router>
         );
     }

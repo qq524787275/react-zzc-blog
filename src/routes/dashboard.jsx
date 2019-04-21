@@ -1,19 +1,21 @@
+import React from "react";
+
 import IconDashboard from "@material-ui/icons/Dashboard";
 import IconApps from "@material-ui/icons/Apps";
 import IconReceipt from "@material-ui/icons/ContentPaste";
 import IconPerson from "@material-ui/icons/Person";
 import IconFavorite from "@material-ui/icons/Favorite";
 
-import Home from "views/Home/Home";
-import ArticleList from "views/Articles/ArticleList";
-import ArticlePulish from "views/Articles/ArticlePulish";
-import ProjectList from "views/Projects/ProjectList";
-import ProjectAdd from "views/Projects/ProjectAdd";
-import UserList from "views/Users/UserList";
-import UserAdd from "views/Users/UserAdd";
-import About from "views/About/About";
+const Home = React.lazy(() => import("views/Home/Home"));
+const ArticleList = React.lazy(() => import("views/Articles/ArticleList"));
+const ArticlePulish = React.lazy(() => import("views/Articles/ArticlePulish"));
+const ProjectList = React.lazy(() => import("views/Projects/ProjectList"));
+const ProjectAdd = React.lazy(() => import("views/Projects/ProjectAdd"));
+const UserList = React.lazy(() => import("views/Users/UserList"));
+const UserAdd = React.lazy(() => import("views/Users/UserAdd"));
+const About = React.lazy(() => import("views/About/About"));
 
-var dashRoutes = [
+let dashRoutes = [
     {
         path: "/admin/home",
         name: "首页",

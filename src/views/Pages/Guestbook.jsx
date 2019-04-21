@@ -28,6 +28,7 @@ import Paper from 'material-ui/Paper';
 import {timestampToTime} from '../../uitls/ProjectDateUtils';
 import RxBus from "../../uitls/RxBus";
 import OnToastEvent from "../../action/OnToastEvent";
+
 class Guestbook extends Component {
 
 
@@ -44,7 +45,7 @@ class Guestbook extends Component {
     state = {
         alert: null,
         result: null,
-        paginate:null
+        paginate: null
     };
 
     componentWillMount() {
@@ -75,14 +76,14 @@ class Guestbook extends Component {
         this.setState({
             ...this.state,
             result: null,
-            paginate:null
+            paginate: null
         })
 
         let response = await guestbookList(page, size);
         this.setState({
             ...this.state,
             result: response.result,
-            paginate:(
+            paginate: (
                 <Grow
                     style={{transitionDelay: (response.result.list.length) * 100}} in={true}
                     timeout={{enter: 500, exit: 0}}>
@@ -243,14 +244,21 @@ class Guestbook extends Component {
                                               timeout={{enter: 500, exit: 0}}>
                                             <ItemGrid>
                                                 <IconCard
-                                                    iconColor={color[Math.floor(Math.random() * 6 + 0)]}
+                                                    iconColor={color[Math.floor(Math.random() * 6)]}
                                                     title={item.nickname}
                                                     icon={Favorite}
                                                     content={
                                                         <div
                                                             style={{height: h, width: 210}}>
                                                             <p>{item.content}</p>
-                                                            <div style={{position:"absolute",bottom:"0px",right:"0px",margin:10,color:"#000",fontStyle:"italic"}}>{timestampToTime(item.date)}</div>
+                                                            <div style={{
+                                                                position: "absolute",
+                                                                bottom: "0px",
+                                                                right: "0px",
+                                                                margin: 10,
+                                                                color: "#000",
+                                                                fontStyle: "italic"
+                                                            }}>{timestampToTime(item.date)}</div>
                                                         </div>
                                                     }>
 

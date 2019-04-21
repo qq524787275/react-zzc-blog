@@ -1,9 +1,4 @@
 import Index from "views/Pages/Index";
-import Article from "views/Pages/Article";
-import Person from "views/Pages/Person";
-import Project from "views/Pages/Project";
-import Guestbook from "views/Pages/Guestbook";
-import About from "views/Pages/About";
 // @material-ui/icons
 import Home from "@material-ui/icons/Home";
 import IconApps from "@material-ui/icons/Apps";
@@ -11,6 +6,15 @@ import IconReceipt from "@material-ui/icons/ContentPaste";
 import IconPerson from "@material-ui/icons/Person";
 import IconLanguage from "@material-ui/icons/Language";
 import Favorite from "@material-ui/icons/Favorite";
+import React from "react";
+
+const Article = React.lazy(() => import("views/Pages/Article"));
+const Person = React.lazy(() => import("views/Pages/Person"));
+const Project = React.lazy(() => import("views/Pages/Project"));
+const Guestbook = React.lazy(() => import("views/Pages/Guestbook"));
+const About = React.lazy(() => import("views/Pages/About"));
+
+
 
 const pagesRoutes = [
     // {
