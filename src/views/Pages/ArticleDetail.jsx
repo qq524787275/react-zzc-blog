@@ -6,6 +6,8 @@ import bgImage from "assets/img/image-mingren.jpg";
 import FullHeaderCard from "components/Cards/FullHeaderCard.jsx";
 import {Fade} from 'material-ui/transitions';
 import Button from 'material-ui/Button';
+import RxBus from "../../uitls/RxBus";
+import OnToastEvent from "../../action/OnToastEvent";
 
 class ArticleDetail extends Component {
 
@@ -46,7 +48,8 @@ class ArticleDetail extends Component {
     loadGetArticleDetial = async (id) => {
         let response = await getArticleVisibleDetail(id);
         if (response.status !== 1) {
-            this.props.history.replace("/article");
+            // this.props.history.replace("/article");
+            RxBus.getInstance().post(new OnToastEvent("数据错误","danger"));
             return;
         }
 

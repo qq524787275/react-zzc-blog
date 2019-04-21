@@ -13,16 +13,16 @@ import IconLanguage from "@material-ui/icons/Language";
 import Favorite from "@material-ui/icons/Favorite";
 
 const pagesRoutes = [
+    // {
+    //     path: "/index",
+    //     name: "Index Page",
+    //     short: "首页",
+    //     mini: "RP",
+    //     icon: Home,
+    //     component: Index
+    // },
     {
         path: "/index",
-        name: "Index Page",
-        short: "首页",
-        mini: "RP",
-        icon: Home,
-        component: Index
-    },
-    {
-        path: "/article",
         name: "Article Page",
         short: "文章",
         mini: "RP",
